@@ -1,0 +1,703 @@
+{
+  "version" : "0.1",
+  "seasons" : [
+    {
+      "spring" : 30,
+      "summer" : 30,
+      "fall" : 30,
+      "winter" : 30
+    }
+  ],
+  "store" : [
+    {
+      "axe" : [
+        {
+          "quantity_available" : 1,
+          "cost" : 100
+        }
+      ],
+      "hammer" : [
+        {
+          "quantity_available" : 1,
+          "cost" : 100
+        }
+      ],
+      "hoe" : [
+        {
+          "quantity_available" : 1,
+          "cost" : 40
+        }
+      ],
+      "spring" : [
+        {
+          "Cabbage Seed" : [
+            {
+              "quantity_available" : 20,
+              "cost" : 20
+            }
+          ],
+          "Potato Seed" : [
+            {
+              "quantity_available" : 30,
+              "cost" : 15
+            }
+          ],
+          "Turnip Seed" : [
+            {
+              "quantity_available" : 20,
+              "cost" : 10
+            }
+          ]
+        }
+      ],
+      "summer" : [
+        {
+          "Avocado Seed" : [
+            {
+              "quantity_available": 20,
+              "cost" : 20
+            }
+          ],
+          "Blueberry Seed" : [
+            {
+              "quantity_available" : 10,
+              "cost" : 30
+            }
+          ],
+          "Corn Seed" : [
+            {
+              "quantity_available" : 30,
+              "cost" : 15
+            }
+          ]
+        }
+      ],
+      "fall" : [
+        {
+          "Celery Seed" : [
+            {
+              "quantity_available" : 30,
+              "cost" : 20
+            }
+          ],
+          "Eggplant Seed" : [
+            {
+              "quantity_available" : 40,
+              "cost" : 20
+            }
+          ],
+          "Pumpkin Seed" : [
+            {
+              "quantity_available" : 10,
+              "cost" : 10
+            }
+          ]
+        }
+      ],
+      "winter" : [
+        {
+          "Broccoli Seed" : [
+            {
+              "quantity_available" : 20,
+              "cost" : 50
+            }
+          ],
+          "Carrot Seed" : [
+            {
+              "quantity_available" : 30,
+              "cost" : 30
+            }
+          ],
+          "Cauliflower Seed" : [
+            {
+              "quantity_available" : 40,
+              "cost" : 40
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "growthRates" : [
+    {
+      "Cabbage Seed" : [
+        {
+          "stage_description" : "shoot",
+          "length" : 2,
+          "season" : "spring"
+        },
+        {
+          "stage_description" : "leaves",
+          "length" : 4,
+          "season" : "spring"
+        },
+        {
+          "stage_description" : "fully grown",
+          "length" : 0,
+          "season" : "spring"
+        }
+      ],
+      "Potato Seed" : [
+        {
+          "stage_description" : "buried",
+          "length" : 2,
+          "season" : "spring"
+        },
+        {
+          "stage_description" : "bulb",
+          "length" : 2,
+          "season" : "spring"
+        },
+        {
+          "stage_description" : "fully grown",
+          "length" : 0,
+          "season" : "spring"
+        }
+      ],
+      "Turnip Seed" : [
+        {
+          "stage_description" : "shoot",
+          "length" : 1,
+          "season" : "spring"
+        },
+        {
+          "stage_description" : "stem",
+          "length" : 2,
+          "season" : "spring"
+        },
+        {
+          "stage_description" : "fully grown",
+          "length" : 0,
+          "season" : "spring"
+        }
+      ],
+      "Avocado Seed" : [
+        {
+          "stage_description" : "shoot",
+          "length" : 4,
+          "season" : "summer"
+        },
+        {
+          "stage_description" : "bulb",
+          "length" : 2,
+          "season" : "summer"
+        },
+        {
+          "stage_description" : "fully grown",
+          "length" : 0,
+          "season" : "summer"
+        }
+      ],
+      "Blueberry Seed" : [
+        {
+          "stage_description" : "shoot",
+          "length" : 5,
+          "season" : "summer"
+        },
+        {
+          "stage_description" : "bulbs",
+          "length" : 2,
+          "season" : "summer"
+        },
+        {
+          "stage_description" : "fully grown",
+          "length" : 0,
+          "season" : "summer"
+        }
+      ],
+      "Corn Seed" : [
+        {
+          "stage_description" : "shoot",
+          "length" : 2,
+          "season" : "summer"
+        },
+        {
+          "stage_description" : "ears",
+          "length" : 2,
+          "season" : "summer"
+        },
+        {
+          "stage_description" : "fully grown",
+          "length" : 0,
+          "season" : "summer"
+        }
+      ],
+      "Celery Seed" : [
+        {
+          "stage_description" : "shoot",
+          "length" : 2,
+          "season" : "fall"
+        },
+        {
+          "stage_description" : "stem",
+          "length" : 2,
+          "season" : "fall"
+        },
+        {
+          "stage_description" : "fully grown",
+          "length" : 0,
+          "season" : "fall"
+        }
+      ],
+      "Eggplant Seed" : [
+        {
+          "stage_description" : "leaf",
+          "length" : 3,
+          "season" : "fall"
+        },
+        {
+          "stage_description" : "bulb",
+          "length" : 4,
+          "season" : "fall"
+        },
+        {
+          "stage_description" : "fully grown",
+          "length" : 0,
+          "season" : "fall"
+        }
+      ],
+      "Pumpkin Seed" : [
+        {
+          "stage_description" : "shoot",
+          "length" : 4,
+          "season" : "fall"
+        },
+        {
+          "stage_description" : "bulb",
+          "length" : 3,
+          "season" : "fall"
+        },
+        {
+          "stage_description" : "fully grown",
+          "length" : 0,
+          "season" : "fall"
+        }
+      ],
+      "Broccoli Seed" : [
+        {
+          "stage_description" : "stem",
+          "length" : 3,
+          "season" : "winter"
+        },
+        {
+          "stage_description" : "bulb",
+          "length" : 2,
+          "season" : "winter"
+        },
+        {
+          "stage_description" : "fully grown",
+          "length" : 0,
+          "season" : "winter"
+        }
+      ],
+      "Carrot Seed" : [
+        {
+          "stage_description" : "shoot",
+          "length" : 2,
+          "season" : "winter"
+        },
+        {
+          "stage_description" : "leaves",
+          "length" : 1,
+          "season" : "winter"
+        },
+        {
+          "stage_description" : "fully grown",
+          "length" : 0,
+          "season" : "winter"
+        }
+      ],
+      "Cauliflower Seed" : [
+        {
+          "stage_description" : "stem",
+          "length" : 2,
+          "season" : "winter"
+        },
+        {
+          "stage_description" : "bulb",
+          "length" : 3,
+          "season" : "winter"
+        },
+        {
+          "stage_description" : "fully grown",
+          "length" : 0,
+          "season" : "winter"
+        }
+      ]
+    }
+  ],
+  "saleRates" : [
+    {
+      "Cabbage Seed" : {
+        "stage_description" : "fully grown",
+        "profit" : 60
+      },
+      "Potato Seed" : {
+        "stage_description" : "fully grown",
+        "profit" : 30
+      },
+      "Turnip Seed" : {
+        "stage_description" : "fully grown",
+        "profit" : 30
+      },
+      "Avocado Seed" : {
+        "stage_description" : "fully grown",
+        "profit" : 60
+      },
+      "Blueberry Seed" : {
+        "stage_description" : "fully grown",
+        "profit" : 90
+      },
+      "Corn Seed" : {
+        "stage_description" : "fully grown",
+        "profit" : 60
+      },
+      "Celery Seed" : {
+        "stage_description" : "fully grown",
+        "profit" : 80
+      },
+      "Eggplant Seed" : {
+        "stage_description" : "fully grown",
+        "profit" : 60
+      },
+      "Pumpkin Seed" : {
+        "stage_description" : "fully grown",
+        "profit" : 100
+      },
+      "Broccoli Seed" : {
+        "stage_description" : "fully grown",
+        "profit" : 200
+      },
+      "Carrot Seed" : {
+        "stage_description" : "fully grown",
+        "profit" : 90
+      },
+      "Cauliflower Seed" : {
+        "stage_description" : "fully grown",
+        "profit" : 120
+      }
+    }
+  ],
+  "plots" : [
+    {
+      "plot_id" : 1,
+      "tilled" : true,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 2,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 3,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 4,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 5,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 6,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 7,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 8,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 9,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 10,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 10,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 11,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : true,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 12,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : true,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 13,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : true,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 14,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : true,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 15,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : true,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 16,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : true,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 17,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : true,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 18,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : true,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 19,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : true,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 20,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : true,
+      "hasStump" : false,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 21,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : true,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 22,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : true,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 23,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : true,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 24,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : true,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 25,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : true,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 26,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : true,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 27,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : true,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 28,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : true,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 29,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : true,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    },
+    {
+      "plot_id" : 30,
+      "tilled" : false,
+      "watered" : false,
+      "hasBigRock" : false,
+      "hasStump" : true,
+      "item_name" : "",
+      "stage_description" : "",
+      "days_grown" : 0
+    }
+  ],
+  "bankAccount" : {
+    "balance" : 100,
+    "debt" : 1000
+  },
+  "inventory" : [
+    {
+      "item_name" : "watering can",
+      "quantity" : 1
+    }
+  ]
+}
