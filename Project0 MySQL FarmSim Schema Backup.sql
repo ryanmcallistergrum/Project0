@@ -167,9 +167,9 @@ CREATE TABLE `store` (
   `quantity_available` int NOT NULL,
   `cost` int NOT NULL,
   `season` varchar(45) NOT NULL,
-  PRIMARY KEY (`item_name`),
   KEY `store_playerinfo_idx` (`player_id`),
   KEY `store_seasons_idx` (`season`),
+  KEY `store_item_name_idx` (`item_name`),
   CONSTRAINT `store_playerinfo` FOREIGN KEY (`player_id`) REFERENCES `playerinfo` (`player_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `store_seasons` FOREIGN KEY (`season`) REFERENCES `seasons` (`season`) ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -192,4 +192,4 @@ CREATE TABLE `store` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-05 13:48:07
+-- Dump completed on 2021-12-05 15:16:31
