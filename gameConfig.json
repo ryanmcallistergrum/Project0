@@ -1,127 +1,92 @@
 {
   "version" : "0.1",
-  "seasons" : [
-    {
+  "seasons" : {
       "" : 0,
       "spring" : 30,
       "summer" : 30,
       "fall" : 30,
       "winter" : 30
-    }
-  ],
-  "store" : [
-    {
+  },
+  "store" : {
       "" : {
-        "quantity_available" : 0,
-        "cost" : 0
+          "": {
+            "quantity_available": 0,
+            "cost": 0
+          },
+          "axe": {
+            "quantity_available": 1,
+            "cost": 100
+          },
+          "hammer": {
+            "quantity_available": 1,
+            "cost": 100
+          },
+          "hoe": {
+            "quantity_available": 1,
+            "cost": 40
+          }
       },
-      "axe" : {
-        "quantity_available" : 1,
-        "cost" : 100
+      "spring" : {
+        "Cabbage Seed" : {
+          "quantity_available" : 20,
+          "cost" : 20
+        },
+        "Potato Seed" : {
+          "quantity_available": 30,
+          "cost": 15
+        },
+        "Turnip Seed" : {
+          "quantity_available" : 20,
+          "cost" : 10
+        }
       },
-      "hammer" : {
-        "quantity_available" : 1,
-        "cost" : 100
+      "summer" : {
+        "Avocado Seed" : {
+          "quantity_available": 20,
+          "cost" : 20
+        },
+        "Blueberry Seed" : {
+          "quantity_available" : 10,
+          "cost" : 30
+        },
+        "Corn Seed" : {
+          "quantity_available" : 30,
+          "cost" : 15
+        }
       },
-      "hoe" : {
-        "quantity_available" : 1,
-        "cost" : 40
+      "fall" : {
+        "Celery Seed" : {
+          "quantity_available" : 30,
+          "cost" : 20
+        },
+        "Eggplant Seed" : {
+          "quantity_available" : 40,
+          "cost" : 20
+        },
+        "Pumpkin Seed" : {
+          "quantity_available" : 10,
+          "cost" : 10
+        }
       },
-      "spring" : [
-        {
-          "Cabbage Seed" : [
-            {
-              "quantity_available" : 20,
-              "cost" : 20
-            }
-          ],
-          "Potato Seed" : [
-            {
-              "quantity_available" : 30,
-              "cost" : 15
-            }
-          ],
-          "Turnip Seed" : [
-            {
-              "quantity_available" : 20,
-              "cost" : 10
-            }
-          ]
+      "winter" : {
+        "Broccoli Seed" : {
+          "quantity_available" : 20,
+          "cost" : 50
+        },
+        "Carrot Seed" : {
+          "quantity_available" : 30,
+          "cost" : 30
+        },
+        "Cauliflower Seed" : {
+          "quantity_available" : 40,
+          "cost" : 40
         }
-      ],
-      "summer" : [
-        {
-          "Avocado Seed" : [
-            {
-              "quantity_available": 20,
-              "cost" : 20
-            }
-          ],
-          "Blueberry Seed" : [
-            {
-              "quantity_available" : 10,
-              "cost" : 30
-            }
-          ],
-          "Corn Seed" : [
-            {
-              "quantity_available" : 30,
-              "cost" : 15
-            }
-          ]
-        }
-      ],
-      "fall" : [
-        {
-          "Celery Seed" : [
-            {
-              "quantity_available" : 30,
-              "cost" : 20
-            }
-          ],
-          "Eggplant Seed" : [
-            {
-              "quantity_available" : 40,
-              "cost" : 20
-            }
-          ],
-          "Pumpkin Seed" : [
-            {
-              "quantity_available" : 10,
-              "cost" : 10
-            }
-          ]
-        }
-      ],
-      "winter" : [
-        {
-          "Broccoli Seed" : [
-            {
-              "quantity_available" : 20,
-              "cost" : 50
-            }
-          ],
-          "Carrot Seed" : [
-            {
-              "quantity_available" : 30,
-              "cost" : 30
-            }
-          ],
-          "Cauliflower Seed" : [
-            {
-              "quantity_available" : 40,
-              "cost" : 40
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "growthRates" : [
-    {
+      }
+  },
+  "growthRates" : {
       "" : {
         "sequence" : 0,
-        "stage_description" : "shoot",
+        "stage_description" : "",
         "length" : 0,
         "season" : ""
       },
@@ -365,10 +330,8 @@
           "season" : "winter"
         }
       ]
-    }
-  ],
-  "saleRates" : [
-    {
+  },
+  "saleRates" : {
       "Cabbage Seed" : {
         "stage_description" : "fully grown",
         "profit" : 60
@@ -417,8 +380,7 @@
         "stage_description" : "fully grown",
         "profit" : 120
       }
-    }
-  ],
+  },
   "plots" : [
     {
       "plot_id" : 1,
