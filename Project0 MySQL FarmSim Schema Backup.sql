@@ -28,19 +28,11 @@ CREATE TABLE `bankaccount` (
   `player_id` int NOT NULL,
   `balance` int NOT NULL,
   `debt` int NOT NULL,
+  UNIQUE KEY `player_id_UNIQUE` (`player_id`),
   KEY `bankaccount_playerinfo_idx` (`player_id`),
-  CONSTRAINT `bankaccount_playerinfo` FOREIGN KEY (`player_id`) REFERENCES `playerinfo` (`player_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `bankaccount_playerinfo` FOREIGN KEY (`player_id`) REFERENCES `playerinfo` (`player_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bankaccount`
---
-
-LOCK TABLES `bankaccount` WRITE;
-/*!40000 ALTER TABLE `bankaccount` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bankaccount` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `growthrates`
@@ -52,6 +44,7 @@ DROP TABLE IF EXISTS `growthrates`;
 CREATE TABLE `growthrates` (
   `player_id` int NOT NULL,
   `item_name` varchar(45) NOT NULL,
+  `sequence` int NOT NULL,
   `stage_description` varchar(45) NOT NULL,
   `length` int NOT NULL,
   `season` varchar(45) NOT NULL,
@@ -59,20 +52,11 @@ CREATE TABLE `growthrates` (
   KEY `growthrates_store_idx` (`item_name`),
   KEY `growthrates_season_idx` (`season`),
   KEY `growthrates_stage_description` (`item_name`,`stage_description`),
-  CONSTRAINT `growthrates_playerinfo` FOREIGN KEY (`player_id`) REFERENCES `playerinfo` (`player_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `growthrates_season` FOREIGN KEY (`season`) REFERENCES `seasons` (`season`) ON UPDATE CASCADE,
-  CONSTRAINT `growthrates_store` FOREIGN KEY (`item_name`) REFERENCES `store` (`item_name`) ON UPDATE CASCADE
+  CONSTRAINT `growthrates_playerinfo` FOREIGN KEY (`player_id`) REFERENCES `playerinfo` (`player_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `growthrates_season` FOREIGN KEY (`season`) REFERENCES `seasons` (`season`) ON UPDATE RESTRICT,
+  CONSTRAINT `growthrates_store` FOREIGN KEY (`item_name`) REFERENCES `store` (`item_name`) ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `growthrates`
---
-
-LOCK TABLES `growthrates` WRITE;
-/*!40000 ALTER TABLE `growthrates` DISABLE KEYS */;
-/*!40000 ALTER TABLE `growthrates` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `inventory`
@@ -87,19 +71,10 @@ CREATE TABLE `inventory` (
   `quantity` int NOT NULL,
   KEY `inventory_playerinfo_idx` (`player_id`),
   KEY `inventory_store_idx` (`item_name`),
-  CONSTRAINT `inventory_playerinfo` FOREIGN KEY (`player_id`) REFERENCES `playerinfo` (`player_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `inventory_store` FOREIGN KEY (`item_name`) REFERENCES `store` (`item_name`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `inventory_playerinfo` FOREIGN KEY (`player_id`) REFERENCES `playerinfo` (`player_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `inventory_store` FOREIGN KEY (`item_name`) REFERENCES `store` (`item_name`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `inventory`
---
-
-LOCK TABLES `inventory` WRITE;
-/*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
-/*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `playerinfo`
@@ -117,17 +92,8 @@ CREATE TABLE `playerinfo` (
   PRIMARY KEY (`player_id`),
   KEY `playerinfo_seasons_idx` (`season`),
   CONSTRAINT `playerinfo_seasons` FOREIGN KEY (`season`) REFERENCES `seasons` (`season`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `playerinfo`
---
-
-LOCK TABLES `playerinfo` WRITE;
-/*!40000 ALTER TABLE `playerinfo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `playerinfo` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `plots`
@@ -148,19 +114,10 @@ CREATE TABLE `plots` (
   `daysGrown` int NOT NULL,
   KEY `plots_playerinfo_idx` (`player_id`),
   KEY `plots_growthrates_idx` (`item_name`,`stage_description`),
-  CONSTRAINT `plots_growthrates` FOREIGN KEY (`item_name`, `stage_description`) REFERENCES `growthrates` (`item_name`, `stage_description`) ON UPDATE CASCADE,
-  CONSTRAINT `plots_playerinfo` FOREIGN KEY (`player_id`) REFERENCES `playerinfo` (`player_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `plots_growthrates` FOREIGN KEY (`item_name`, `stage_description`) REFERENCES `growthrates` (`item_name`, `stage_description`) ON UPDATE RESTRICT,
+  CONSTRAINT `plots_playerinfo` FOREIGN KEY (`player_id`) REFERENCES `playerinfo` (`player_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `plots`
---
-
-LOCK TABLES `plots` WRITE;
-/*!40000 ALTER TABLE `plots` DISABLE KEYS */;
-/*!40000 ALTER TABLE `plots` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `salerates`
@@ -177,20 +134,11 @@ CREATE TABLE `salerates` (
   KEY `salerates_playerinfo_idx` (`player_id`),
   KEY `salerates_store_idx` (`item_name`),
   KEY `salerates_growthrates_idx` (`item_name`,`stage_description`),
-  CONSTRAINT `salerates_growthrates` FOREIGN KEY (`item_name`, `stage_description`) REFERENCES `growthrates` (`item_name`, `stage_description`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `salerates_playerinfo` FOREIGN KEY (`player_id`) REFERENCES `playerinfo` (`player_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `salerates_store` FOREIGN KEY (`item_name`) REFERENCES `store` (`item_name`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `salerates_growthrates` FOREIGN KEY (`item_name`, `stage_description`) REFERENCES `growthrates` (`item_name`, `stage_description`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `salerates_playerinfo` FOREIGN KEY (`player_id`) REFERENCES `playerinfo` (`player_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `salerates_store` FOREIGN KEY (`item_name`) REFERENCES `store` (`item_name`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `salerates`
---
-
-LOCK TABLES `salerates` WRITE;
-/*!40000 ALTER TABLE `salerates` DISABLE KEYS */;
-/*!40000 ALTER TABLE `salerates` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `seasons`
@@ -205,15 +153,6 @@ CREATE TABLE `seasons` (
   PRIMARY KEY (`season`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `seasons`
---
-
-LOCK TABLES `seasons` WRITE;
-/*!40000 ALTER TABLE `seasons` DISABLE KEYS */;
-/*!40000 ALTER TABLE `seasons` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `store`
@@ -231,19 +170,14 @@ CREATE TABLE `store` (
   PRIMARY KEY (`item_name`),
   KEY `store_playerinfo_idx` (`player_id`),
   KEY `store_seasons_idx` (`season`),
-  CONSTRAINT `store_playerinfo` FOREIGN KEY (`player_id`) REFERENCES `playerinfo` (`player_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `store_seasons` FOREIGN KEY (`season`) REFERENCES `seasons` (`season`) ON UPDATE CASCADE
+  CONSTRAINT `store_playerinfo` FOREIGN KEY (`player_id`) REFERENCES `playerinfo` (`player_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `store_seasons` FOREIGN KEY (`season`) REFERENCES `seasons` (`season`) ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `store`
+-- Dumping events for database 'farmsim'
 --
-
-LOCK TABLES `store` WRITE;
-/*!40000 ALTER TABLE `store` DISABLE KEYS */;
-/*!40000 ALTER TABLE `store` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'farmsim'
@@ -258,4 +192,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-04 22:24:28
+-- Dump completed on 2021-12-05 13:48:07

@@ -123,16 +123,19 @@
       "Cabbage Seed" : [
         {
           "stage_description" : "shoot",
+          "sequence" : 0,
           "length" : 2,
           "season" : "spring"
         },
         {
           "stage_description" : "leaves",
+          "sequence" : 1,
           "length" : 4,
           "season" : "spring"
         },
         {
           "stage_description" : "fully grown",
+          "sequence" : 2,
           "length" : 0,
           "season" : "spring"
         }
@@ -140,16 +143,19 @@
       "Potato Seed" : [
         {
           "stage_description" : "buried",
+          "sequence" : 0,
           "length" : 2,
           "season" : "spring"
         },
         {
           "stage_description" : "bulb",
+          "sequence" : 1,
           "length" : 2,
           "season" : "spring"
         },
         {
           "stage_description" : "fully grown",
+          "sequence" : 2,
           "length" : 0,
           "season" : "spring"
         }
@@ -157,16 +163,19 @@
       "Turnip Seed" : [
         {
           "stage_description" : "shoot",
+          "sequence" : 0,
           "length" : 1,
           "season" : "spring"
         },
         {
           "stage_description" : "stem",
+          "sequence" : 1,
           "length" : 2,
           "season" : "spring"
         },
         {
           "stage_description" : "fully grown",
+          "sequence" : 2,
           "length" : 0,
           "season" : "spring"
         }
@@ -174,16 +183,19 @@
       "Avocado Seed" : [
         {
           "stage_description" : "shoot",
+          "sequence" : 0,
           "length" : 4,
           "season" : "summer"
         },
         {
           "stage_description" : "bulb",
+          "sequence" : 1,
           "length" : 2,
           "season" : "summer"
         },
         {
           "stage_description" : "fully grown",
+          "sequence" : 2,
           "length" : 0,
           "season" : "summer"
         }
@@ -191,16 +203,19 @@
       "Blueberry Seed" : [
         {
           "stage_description" : "shoot",
+          "sequence" : 0,
           "length" : 5,
           "season" : "summer"
         },
         {
           "stage_description" : "bulbs",
+          "sequence" : 1,
           "length" : 2,
           "season" : "summer"
         },
         {
           "stage_description" : "fully grown",
+          "sequence" : 2,
           "length" : 0,
           "season" : "summer"
         }
@@ -208,16 +223,19 @@
       "Corn Seed" : [
         {
           "stage_description" : "shoot",
+          "sequence" : 0,
           "length" : 2,
           "season" : "summer"
         },
         {
           "stage_description" : "ears",
+          "sequence" : 1,
           "length" : 2,
           "season" : "summer"
         },
         {
           "stage_description" : "fully grown",
+          "sequence" : 2,
           "length" : 0,
           "season" : "summer"
         }
@@ -225,16 +243,19 @@
       "Celery Seed" : [
         {
           "stage_description" : "shoot",
+          "sequence" : 0,
           "length" : 2,
           "season" : "fall"
         },
         {
           "stage_description" : "stem",
+          "sequence" : 1,
           "length" : 2,
           "season" : "fall"
         },
         {
           "stage_description" : "fully grown",
+          "sequence" : 2,
           "length" : 0,
           "season" : "fall"
         }
@@ -242,16 +263,19 @@
       "Eggplant Seed" : [
         {
           "stage_description" : "leaf",
+          "sequence" : 0,
           "length" : 3,
           "season" : "fall"
         },
         {
           "stage_description" : "bulb",
+          "sequence" : 1,
           "length" : 4,
           "season" : "fall"
         },
         {
           "stage_description" : "fully grown",
+          "sequence" : 2,
           "length" : 0,
           "season" : "fall"
         }
@@ -259,16 +283,19 @@
       "Pumpkin Seed" : [
         {
           "stage_description" : "shoot",
+          "sequence" : 0,
           "length" : 4,
           "season" : "fall"
         },
         {
           "stage_description" : "bulb",
+          "sequence" : 1,
           "length" : 3,
           "season" : "fall"
         },
         {
           "stage_description" : "fully grown",
+          "sequence" : 2,
           "length" : 0,
           "season" : "fall"
         }
@@ -276,16 +303,19 @@
       "Broccoli Seed" : [
         {
           "stage_description" : "stem",
+          "sequence" : 0,
           "length" : 3,
           "season" : "winter"
         },
         {
           "stage_description" : "bulb",
+          "sequence" : 1,
           "length" : 2,
           "season" : "winter"
         },
         {
           "stage_description" : "fully grown",
+          "sequence" : 2,
           "length" : 0,
           "season" : "winter"
         }
@@ -293,16 +323,19 @@
       "Carrot Seed" : [
         {
           "stage_description" : "shoot",
+          "sequence" : 0,
           "length" : 2,
           "season" : "winter"
         },
         {
           "stage_description" : "leaves",
+          "sequence" : 1,
           "length" : 1,
           "season" : "winter"
         },
         {
           "stage_description" : "fully grown",
+          "sequence" : 2,
           "length" : 0,
           "season" : "winter"
         }
@@ -310,16 +343,19 @@
       "Cauliflower Seed" : [
         {
           "stage_description" : "stem",
+          "sequence" : 0,
           "length" : 2,
           "season" : "winter"
         },
         {
           "stage_description" : "bulb",
+          "sequence" : 1,
           "length" : 3,
           "season" : "winter"
         },
         {
           "stage_description" : "fully grown",
+          "sequence" : 2,
           "length" : 0,
           "season" : "winter"
         }
