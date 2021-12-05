@@ -11,30 +11,22 @@
   ],
   "store" : [
     {
-      "" : [
-        {
-          "quantity_available" : 0,
-          "cost" : 0
-        }
-      ],
-      "axe" : [
-        {
-          "quantity_available" : 1,
-          "cost" : 100
-        }
-      ],
-      "hammer" : [
-        {
-          "quantity_available" : 1,
-          "cost" : 100
-        }
-      ],
-      "hoe" : [
-        {
-          "quantity_available" : 1,
-          "cost" : 40
-        }
-      ],
+      "" : {
+        "quantity_available" : 0,
+        "cost" : 0
+      },
+      "axe" : {
+        "quantity_available" : 1,
+        "cost" : 100
+      },
+      "hammer" : {
+        "quantity_available" : 1,
+        "cost" : 100
+      },
+      "hoe" : {
+        "quantity_available" : 1,
+        "cost" : 40
+      },
       "spring" : [
         {
           "Cabbage Seed" : [
@@ -128,247 +120,247 @@
   "growthRates" : [
     {
       "" : {
-        "stage_description" : "shoot",
         "sequence" : 0,
+        "stage_description" : "shoot",
         "length" : 0,
         "season" : ""
       },
       "Cabbage Seed" : [
         {
-          "stage_description" : "shoot",
           "sequence" : 0,
+          "stage_description" : "shoot",
           "length" : 2,
           "season" : "spring"
         },
         {
-          "stage_description" : "leaves",
           "sequence" : 1,
+          "stage_description" : "leaves",
           "length" : 4,
           "season" : "spring"
         },
         {
-          "stage_description" : "fully grown",
           "sequence" : 2,
+          "stage_description" : "fully grown",
           "length" : 0,
           "season" : "spring"
         }
       ],
       "Potato Seed" : [
         {
-          "stage_description" : "buried",
           "sequence" : 0,
+          "stage_description" : "buried",
           "length" : 2,
           "season" : "spring"
         },
         {
-          "stage_description" : "bulb",
           "sequence" : 1,
+          "stage_description" : "bulb",
           "length" : 2,
           "season" : "spring"
         },
         {
-          "stage_description" : "fully grown",
           "sequence" : 2,
+          "stage_description" : "fully grown",
           "length" : 0,
           "season" : "spring"
         }
       ],
       "Turnip Seed" : [
         {
-          "stage_description" : "shoot",
           "sequence" : 0,
+          "stage_description" : "shoot",
           "length" : 1,
           "season" : "spring"
         },
         {
-          "stage_description" : "stem",
           "sequence" : 1,
+          "stage_description" : "stem",
           "length" : 2,
           "season" : "spring"
         },
         {
-          "stage_description" : "fully grown",
           "sequence" : 2,
+          "stage_description" : "fully grown",
           "length" : 0,
           "season" : "spring"
         }
       ],
       "Avocado Seed" : [
         {
-          "stage_description" : "shoot",
           "sequence" : 0,
+          "stage_description" : "shoot",
           "length" : 4,
           "season" : "summer"
         },
         {
-          "stage_description" : "bulb",
           "sequence" : 1,
+          "stage_description" : "bulb",
           "length" : 2,
           "season" : "summer"
         },
         {
-          "stage_description" : "fully grown",
           "sequence" : 2,
+          "stage_description" : "fully grown",
           "length" : 0,
           "season" : "summer"
         }
       ],
       "Blueberry Seed" : [
         {
-          "stage_description" : "shoot",
           "sequence" : 0,
+          "stage_description" : "shoot",
           "length" : 5,
           "season" : "summer"
         },
         {
-          "stage_description" : "bulbs",
           "sequence" : 1,
+          "stage_description" : "bulbs",
           "length" : 2,
           "season" : "summer"
         },
         {
-          "stage_description" : "fully grown",
           "sequence" : 2,
+          "stage_description" : "fully grown",
           "length" : 0,
           "season" : "summer"
         }
       ],
       "Corn Seed" : [
         {
-          "stage_description" : "shoot",
           "sequence" : 0,
+          "stage_description" : "shoot",
           "length" : 2,
           "season" : "summer"
         },
         {
-          "stage_description" : "ears",
           "sequence" : 1,
+          "stage_description" : "ears",
           "length" : 2,
           "season" : "summer"
         },
         {
-          "stage_description" : "fully grown",
           "sequence" : 2,
+          "stage_description" : "fully grown",
           "length" : 0,
           "season" : "summer"
         }
       ],
       "Celery Seed" : [
         {
-          "stage_description" : "shoot",
           "sequence" : 0,
+          "stage_description" : "shoot",
           "length" : 2,
           "season" : "fall"
         },
         {
-          "stage_description" : "stem",
           "sequence" : 1,
+          "stage_description" : "stem",
           "length" : 2,
           "season" : "fall"
         },
         {
-          "stage_description" : "fully grown",
           "sequence" : 2,
+          "stage_description" : "fully grown",
           "length" : 0,
           "season" : "fall"
         }
       ],
       "Eggplant Seed" : [
         {
-          "stage_description" : "leaf",
           "sequence" : 0,
+          "stage_description" : "leaf",
           "length" : 3,
           "season" : "fall"
         },
         {
-          "stage_description" : "bulb",
           "sequence" : 1,
+          "stage_description" : "bulb",
           "length" : 4,
           "season" : "fall"
         },
         {
-          "stage_description" : "fully grown",
           "sequence" : 2,
+          "stage_description" : "fully grown",
           "length" : 0,
           "season" : "fall"
         }
       ],
       "Pumpkin Seed" : [
         {
-          "stage_description" : "shoot",
           "sequence" : 0,
+          "stage_description" : "shoot",
           "length" : 4,
           "season" : "fall"
         },
         {
-          "stage_description" : "bulb",
           "sequence" : 1,
+          "stage_description" : "bulb",
           "length" : 3,
           "season" : "fall"
         },
         {
-          "stage_description" : "fully grown",
           "sequence" : 2,
+          "stage_description" : "fully grown",
           "length" : 0,
           "season" : "fall"
         }
       ],
       "Broccoli Seed" : [
         {
-          "stage_description" : "stem",
           "sequence" : 0,
+          "stage_description" : "stem",
           "length" : 3,
           "season" : "winter"
         },
         {
-          "stage_description" : "bulb",
           "sequence" : 1,
+          "stage_description" : "bulb",
           "length" : 2,
           "season" : "winter"
         },
         {
-          "stage_description" : "fully grown",
           "sequence" : 2,
+          "stage_description" : "fully grown",
           "length" : 0,
           "season" : "winter"
         }
       ],
       "Carrot Seed" : [
         {
-          "stage_description" : "shoot",
           "sequence" : 0,
+          "stage_description" : "shoot",
           "length" : 2,
           "season" : "winter"
         },
         {
-          "stage_description" : "leaves",
           "sequence" : 1,
+          "stage_description" : "leaves",
           "length" : 1,
           "season" : "winter"
         },
         {
-          "stage_description" : "fully grown",
           "sequence" : 2,
+          "stage_description" : "fully grown",
           "length" : 0,
           "season" : "winter"
         }
       ],
       "Cauliflower Seed" : [
         {
-          "stage_description" : "stem",
           "sequence" : 0,
+          "stage_description" : "stem",
           "length" : 2,
           "season" : "winter"
         },
         {
-          "stage_description" : "bulb",
           "sequence" : 1,
+          "stage_description" : "bulb",
           "length" : 3,
           "season" : "winter"
         },
         {
-          "stage_description" : "fully grown",
           "sequence" : 2,
+          "stage_description" : "fully grown",
           "length" : 0,
           "season" : "winter"
         }
