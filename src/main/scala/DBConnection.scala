@@ -1,5 +1,5 @@
-import java.io.IOException;
-import java.sql.{Connection, DriverManager, ResultSet, SQLException, Statement};
+import java.io.IOException
+import java.sql.{Connection, DriverManager, ResultSet, SQLException, SQLIntegrityConstraintViolationException, Statement};
 
 class DBConnection {
   private final val CONNECTION_STRING: String = "jdbc:mysql://localhost/farmSim";
@@ -50,29 +50,29 @@ class DBConnection {
         i.printStackTrace();
         None;
       }
-      case n: NullPointerException => {
+      case n: SQLIntegrityConstraintViolationException => {
         n.printStackTrace();
         None;
       }
     }
   }
 
-  protected def executeQuery(query: String): Option[ResultSet] = {
+  protected def executeQuery(query: String): ResultSet = {
     try {
       stmt = conn.createStatement();
-      Some(stmt.executeQuery(query));
+      stmt.executeQuery(query);
     } catch {
       case e: SQLException => {
         e.printStackTrace();
-        None;
+        null;
       }
       case i: IOException => {
         i.printStackTrace();
-        None;
+        null;
       }
-      case n: NullPointerException => {
+      case n: SQLIntegrityConstraintViolationException => {
         n.printStackTrace();
-        None;
+        null;
       }
     }
   }
@@ -117,8 +117,7 @@ object DBConnection {
   protected def executeDML(query : String) : Option[Boolean] = {
     try {
       stmt = conn.createStatement();
-      val result:Boolean = stmt.execute(query);
-      Some(result);
+      Some(stmt.execute(query));
     } catch {
       case e: SQLException => {
         e.printStackTrace();
@@ -128,25 +127,29 @@ object DBConnection {
         i.printStackTrace();
         None;
       }
-      case n: NullPointerException => {
+      case n: SQLIntegrityConstraintViolationException => {
         n.printStackTrace();
         None;
       }
     }
   }
 
-  protected def executeQuery(query: String): Option[ResultSet] = {
+  protected def executeQuery(query: String): ResultSet = {
     try {
-      rs = stmt.executeQuery(query);
-      Some(rs);
+      stmt = conn.createStatement();
+      stmt.executeQuery(query);
     } catch {
       case e: SQLException => {
         e.printStackTrace();
-        None;
+        null;
       }
       case i: IOException => {
         i.printStackTrace();
-        None;
+        null;
+      }
+      case n: SQLIntegrityConstraintViolationException => {
+        n.printStackTrace();
+        null;
       }
     }
   }
