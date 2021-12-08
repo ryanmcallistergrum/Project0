@@ -4,9 +4,9 @@ import java.sql.{Connection, DriverManager, ResultSet, SQLException, SQLIntegrit
 class DBConnection {
   private final val CONNECTION_STRING: String = "jdbc:mysql://localhost/farmSim";
   private final val DRIVER: String = "com.mysql.cj.jdbc.Driver";
-  private var conn: Connection = _;
-  private var stmt: Statement = _;
-  private val rs: ResultSet = _;
+  private var conn: Connection = null;
+  private var stmt: Statement = null;
+  private val rs: ResultSet = null;
 
 
   protected def connect(): Unit = {
@@ -81,9 +81,9 @@ class DBConnection {
 object DBConnection {
   private final val CONNECTION_STRING: String = "jdbc:mysql://localhost/farmSim";
   private final val DRIVER: String = "com.mysql.cj.jdbc.Driver";
-  private var conn: Connection = _;
-  private var stmt: Statement = _;
-  private val rs: ResultSet = _;
+  private var conn: Connection = null;
+  private var stmt: Statement = null;
+  private val rs: ResultSet = null;
 
 
   protected def connect(): Unit = {
