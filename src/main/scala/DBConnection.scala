@@ -6,7 +6,7 @@ class DBConnection {
   private final val DRIVER: String = "com.mysql.cj.jdbc.Driver";
   private var conn: Connection = _;
   private var stmt: Statement = _;
-  private var rs: ResultSet = _;
+  private val rs: ResultSet = _;
 
 
   protected def connect(): Unit = {
@@ -80,10 +80,10 @@ class DBConnection {
 
 object DBConnection {
   private final val CONNECTION_STRING: String = "jdbc:mysql://localhost/farmSim";
-  private final val DRIVER: String = "com.mysql.jdbc.Driver";
+  private final val DRIVER: String = "com.mysql.cj.jdbc.Driver";
   private var conn: Connection = _;
   private var stmt: Statement = _;
-  private var rs: ResultSet = _;
+  private val rs: ResultSet = _;
 
 
   protected def connect(): Unit = {
