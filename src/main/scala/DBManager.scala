@@ -296,9 +296,9 @@ class DBManager extends DBConnection {
     return result.toMap;
   }
 
-  protected def addPlot(player_id : Int, plot_id : Int, tilled : Boolean, hasBigRock : Boolean, hasStump : Boolean, item_name : String, stage_description : String, daysGrown : Int) : Unit = {
+  protected def addPlot(player_id : Int, plot_id : Int, tilled : Boolean, watered : Boolean, hasBigRock : Boolean, hasStump : Boolean, item_name : String, stage_description : String, daysGrown : Int) : Unit = {
     connect();
-    executeDML(s"insert into plots(player_id, plot_id, tilled, watered, hasBigRock, hasStump, item_name, stage_description, daysGrown) values ($player_id, $plot_id, $tilled, false, $hasBigRock, $hasStump, \"$item_name\", \"$stage_description\", $daysGrown);");
+    executeDML(s"insert into plots(player_id, plot_id, tilled, watered, hasBigRock, hasStump, item_name, stage_description, daysGrown) values ($player_id, $plot_id, $tilled, $watered, $hasBigRock, $hasStump, \"$item_name\", \"$stage_description\", $daysGrown);");
     disconnect();
   }
   def getPlots(player_id : Int) : List[(Int, Boolean, Boolean, Boolean, Boolean, String, String, Int)] = {
