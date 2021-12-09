@@ -21,7 +21,7 @@ class DBManager extends DBConnection {
     val id:Int = getNextPlayerId();
     connect();
 
-    executeDML(s"insert into playerinfo (player_id, gameVersion, name, day, season) values ( $id, \"$gameVersion\", \"$name\", 1, \"spring\");");
+    executeDML(s"insert into playerinfo (player_id, gameVersion, name, day, season) values ( $id, \"$gameVersion\", \"$name\", 1, \"Spring\");");
 
     disconnect();
 
@@ -405,7 +405,7 @@ object DBManager extends DBConnection {
     val id:Int = getNextPlayerId();
     connect();
 
-    executeDML(s"insert into playerinfo (player_id, gameVersion, name, day, season) values ( $id, \"$gameVersion\", \"$name\", 1, \"spring\");");
+    executeDML(s"insert into playerinfo (player_id, gameVersion, name, day, season) values ( $id, \"$gameVersion\", \"$name\", 1, \"Spring\");");
 
     disconnect();
 
