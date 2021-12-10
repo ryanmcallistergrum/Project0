@@ -315,7 +315,7 @@ object View {
     }
     if (inventory.contains("Axe")) {
       print(prettyPrint("[C]", 1, true, true, List("yellow")));
-      println("ill Plots");
+      println("hop Stump");
     }
     if (inventory.contains("Hammer")) {
       print(prettyPrint("[S]", 1, true, true, List("white")));
