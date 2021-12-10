@@ -201,7 +201,7 @@ class DBManager extends DBConnection {
     var result:mutable.ListBuffer[(String, Int, Int, String)] = mutable.ListBuffer();
     connect();
 
-    val rs:ResultSet = executeQuery(s"select item_name, quantity_available, cost, season from store where player_id = $player_id and season = \"$season\";");
+    val rs:ResultSet = executeQuery(s"select item_name, quantity_available, cost, season from store where player_id = $player_id and (season = \"$season\" or season = \"\");");
     if (rs != null) {
       while (rs.next()) {
         result.addOne(
@@ -580,7 +580,7 @@ object DBManager extends DBConnection {
     var result:mutable.ListBuffer[(String, Int, Int, String)] = mutable.ListBuffer();
     connect();
 
-    val rs:ResultSet = executeQuery(s"select item_name, quantity_available, cost, season from store where player_id = $player_id and season = \"$season\";");
+    val rs:ResultSet = executeQuery(s"select item_name, quantity_available, cost, season from store where player_id = $player_id and (season = \"$season\" or season = \"\");");
     if (rs != null) {
       while (rs.next()) {
         result.addOne(
