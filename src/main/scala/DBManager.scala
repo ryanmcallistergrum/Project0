@@ -192,14 +192,13 @@ class DBManager extends DBConnection {
     disconnect();
   }
 
-  protected def addItemToStore(player_id : Int, item_name : String, quantity : Int, cost : Int, season : String) : List[(String, Int, Int)] = {
+  protected def addItemToStore(player_id : Int, item_name : String, quantity : Int, cost : Int, season : String) : Unit = {
     connect();
     executeDML(s"insert into store (player_id, item_name, quantity_available, cost, season) values ($player_id, \"$item_name\", $quantity, $cost, \"$season\");");
     disconnect();
-    return getStoreForSeason(player_id, season);
   }
-  def getStoreForSeason(player_id : Int, season : String) : List[(String, Int, Int)] = {
-    var result:mutable.ListBuffer[(String, Int, Int)] = mutable.ListBuffer();
+  def getStoreForSeason(player_id : Int, season : String) : List[(String, Int, Int, String)] = {
+    var result:mutable.ListBuffer[(String, Int, Int, String)] = mutable.ListBuffer();
     connect();
 
     val rs:ResultSet = executeQuery(s"select item_name, quantity_available, cost from store where player_id = $player_id and season = \"$season\";");
@@ -207,13 +206,12 @@ class DBManager extends DBConnection {
       while (rs.next()) {
         result.addOne(
           (
-            rs.getString("item_name"), rs.getInt("quantity_available"), rs.getInt("cost")
+            rs.getString("item_name"), rs.getInt("quantity_available"), rs.getInt("cost"), rs.getString("season")
           )
         );
       }
       rs.close();
     }
-
 
     disconnect();
 
@@ -573,14 +571,13 @@ object DBManager extends DBConnection {
     disconnect();
   }
 
-  protected def addItemToStore(player_id : Int, item_name : String, quantity : Int, cost : Int, season : String) : List[(String, Int, Int)] = {
+  protected def addItemToStore(player_id : Int, item_name : String, quantity : Int, cost : Int, season : String) : Unit = {
     connect();
     executeDML(s"insert into store (player_id, item_name, quantity_available, cost, season) values ($player_id, \"$item_name\", $quantity, $cost, \"$season\");");
     disconnect();
-    return getStoreForSeason(player_id, season);
   }
-  def getStoreForSeason(player_id : Int, season : String) : List[(String, Int, Int)] = {
-    var result:mutable.ListBuffer[(String, Int, Int)] = mutable.ListBuffer();
+  def getStoreForSeason(player_id : Int, season : String) : List[(String, Int, Int, String)] = {
+    var result:mutable.ListBuffer[(String, Int, Int, String)] = mutable.ListBuffer();
     connect();
 
     val rs:ResultSet = executeQuery(s"select item_name, quantity_available, cost from store where player_id = $player_id and season = \"$season\";");
@@ -588,13 +585,12 @@ object DBManager extends DBConnection {
       while (rs.next()) {
         result.addOne(
           (
-            rs.getString("item_name"), rs.getInt("quantity_available"), rs.getInt("cost")
+            rs.getString("item_name"), rs.getInt("quantity_available"), rs.getInt("cost"), rs.getString("season")
           )
         );
       }
       rs.close();
     }
-
 
     disconnect();
 
