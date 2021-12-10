@@ -157,14 +157,13 @@ class DBManager extends DBConnection {
     return getBankAccount(player_id);
   }
 
-  def addItemToInventory(player_id : Int, item_name : String, quantity :Int) : List[(String, Int)] = {
+  def addItemToInventory(player_id : Int, item_name : String, quantity :Int) : Unit = {
     connect();
     executeDML(s"insert into inventory(player_id, item_name, quantity) values ($player_id, \"$item_name\", $quantity);");
     disconnect();
-    return getInventory(player_id);
   }
-  def getInventory(player_id : Int) : List[(String, Int)] = {
-    var result:mutable.ListBuffer[(String, Int)] = mutable.ListBuffer[(String, Int)]();
+  def getInventory(player_id : Int) : Map[String, Int] = {
+    var result:mutable.Map[String, Int] = mutable.Map();
 
     connect();
 
@@ -180,19 +179,17 @@ class DBManager extends DBConnection {
       rs.close();
     }
 
-    return result.toList;
+    return result.toMap
   }
-  def updateItemInventoryQuantity(player_id : Int, item_name : String, newQuantity : Int) : List[(String, Int)] = {
+  def updateItemInventoryQuantity(player_id : Int, item_name : String, newQuantity : Int) : Unit = {
     connect();
     executeDML(s"update inventory set quantity = $newQuantity where player_id = $player_id and item_name = \"$item_name\";");
     disconnect();
-    return getInventory(player_id);
   }
-  def removeItemFromInventory(player_id : Int, item_name : String) : List[(String, Int)] = {
+  def removeItemFromInventory(player_id : Int, item_name : String) : Unit = {
     connect();
     executeDML("delete from inventory where player_id = $player_id and item_name = \"$item_name\";");
     disconnect();
-    return getInventory(player_id);
   }
 
   protected def addItemToStore(player_id : Int, item_name : String, quantity : Int, cost : Int, season : String) : List[(String, Int, Int)] = {
@@ -541,14 +538,13 @@ object DBManager extends DBConnection {
     return getBankAccount(player_id);
   }
 
-  def addItemToInventory(player_id : Int, item_name : String, quantity :Int) : List[(String, Int)] = {
+  def addItemToInventory(player_id : Int, item_name : String, quantity :Int) : Unit = {
     connect();
     executeDML(s"insert into inventory(player_id, item_name, quantity) values ($player_id, \"$item_name\", $quantity);");
     disconnect();
-    return getInventory(player_id);
   }
-  def getInventory(player_id : Int) : List[(String, Int)] = {
-    var result:mutable.ListBuffer[(String, Int)] = mutable.ListBuffer[(String, Int)]();
+  def getInventory(player_id : Int) : Map[String, Int] = {
+    var result:mutable.Map[String, Int] = mutable.Map();
 
     connect();
 
@@ -564,19 +560,17 @@ object DBManager extends DBConnection {
       rs.close();
     }
 
-    return result.toList;
+    return result.toMap
   }
-  def updateItemInventoryQuantity(player_id : Int, item_name : String, newQuantity : Int) : List[(String, Int)] = {
+  def updateItemInventoryQuantity(player_id : Int, item_name : String, newQuantity : Int) : Unit = {
     connect();
     executeDML(s"update inventory set quantity = $newQuantity where player_id = $player_id and item_name = \"$item_name\";");
     disconnect();
-    return getInventory(player_id);
   }
-  def removeItemFromInventory(player_id : Int, item_name : String) : List[(String, Int)] = {
+  def removeItemFromInventory(player_id : Int, item_name : String) : Unit = {
     connect();
     executeDML("delete from inventory where player_id = $player_id and item_name = \"$item_name\";");
     disconnect();
-    return getInventory(player_id);
   }
 
   protected def addItemToStore(player_id : Int, item_name : String, quantity : Int, cost : Int, season : String) : List[(String, Int, Int)] = {
