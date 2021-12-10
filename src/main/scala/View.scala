@@ -362,6 +362,10 @@ object View {
   }
 
   def store(player_id : Int) : Unit = {
+    print("Gold available: ");
+    println(prettyPrint(DBManager.getBankAccount(player_id)("balance").toString, 1, true, true, List("yellow")));
+    println();
+
     val storeContents:List[(String, Int, Int, String)] = DBManager.getStoreForSeason(player_id, DBManager.getPlayersInfo().filter(p => p._1 == player_id).head._5);
 
     for (item:(String, Int, Int, String) <- storeContents.filter(p => p._4 == "" || p._4 == DBManager.getPlayersInfo().filter(p => p._1 == player_id).head._5).sortBy(p => p._4)) {
