@@ -71,7 +71,51 @@ class DBManager extends DBConnection {
 
     return result;
   }
-  def nextDay(player_id : Int) : Unit = {}
+  def nextDay(player_id : Int) : Unit = {
+    var playerInfo:(Int, String, String, Int, String) = getPlayersInfo().filter(p => p._1 == player_id).head;
+
+    if (playerInfo._4 + 1 > getSeasonsInfo()(playerInfo._5)) {
+      if (playerInfo._5.equals("winter")) {
+        connect();
+        executeDML(s"update playerInfo set day = 0 where player_id = $player_id");
+        disconnect();
+      } else {
+        var nextSeason = "";
+        playerInfo._5 match {
+          case "Spring" => {
+            connect();
+            executeDML(s"update playerInfo set day = 1, season = 'Summer' where player_id = $player_id");
+            disconnect();
+            nextSeason = "Summer"
+          }
+          case "Summer" => {
+            connect();
+            executeDML(s"update playerInfo set day = 1, season = 'Fall' where player_id = $player_id");
+            disconnect();
+            nextSeason = "Fall"
+          }
+          case "Fall" => {
+            connect();
+            executeDML(s"update playerInfo set day = 1, season = 'Winter' where player_id = $player_id");
+            disconnect();
+            nextSeason = "Winter"
+          }
+        }
+
+        for(plant <- getPlots(player_id).filter(p => p._6.nonEmpty))
+          if (!getGrowthRates(player_id, nextSeason).exists(p => p._1.equals(plant._6)))
+            removePlant(player_id, plant._1);
+
+        growPlants(player_id);
+      }
+    } else {
+      connect();
+      executeDML(s"update playerInfo set day = ${playerInfo._4 + 1} where player_id = $player_id");
+      disconnect();
+
+      growPlants(player_id);
+    }
+  }
   def deletePlayer(player_id : Int) : Unit = {
     connect();
     executeDML(s"delete from salerates where player_id = $player_id;");
@@ -450,7 +494,51 @@ object DBManager extends DBConnection {
 
     return result;
   }
-  def nextDay(player_id : Int) : Unit = {}
+  def nextDay(player_id : Int) : Unit = {
+    var playerInfo:(Int, String, String, Int, String) = getPlayersInfo().filter(p => p._1 == player_id).head;
+
+    if (playerInfo._4 + 1 > getSeasonsInfo()(playerInfo._5)) {
+      if (playerInfo._5.equals("winter")) {
+        connect();
+        executeDML(s"update playerInfo set day = 0 where player_id = $player_id");
+        disconnect();
+      } else {
+        var nextSeason = "";
+        playerInfo._5 match {
+          case "Spring" => {
+            connect();
+            executeDML(s"update playerInfo set day = 1, season = 'Summer' where player_id = $player_id");
+            disconnect();
+            nextSeason = "Summer"
+          }
+          case "Summer" => {
+            connect();
+            executeDML(s"update playerInfo set day = 1, season = 'Fall' where player_id = $player_id");
+            disconnect();
+            nextSeason = "Fall"
+          }
+          case "Fall" => {
+            connect();
+            executeDML(s"update playerInfo set day = 1, season = 'Winter' where player_id = $player_id");
+            disconnect();
+            nextSeason = "Winter"
+          }
+        }
+
+        for(plant <- getPlots(player_id).filter(p => p._6.nonEmpty))
+          if (!getGrowthRates(player_id, nextSeason).exists(p => p._1.equals(plant._6)))
+            removePlant(player_id, plant._1);
+
+        growPlants(player_id);
+      }
+    } else {
+      connect();
+      executeDML(s"update playerInfo set day = ${playerInfo._4 + 1} where player_id = $player_id");
+      disconnect();
+
+      growPlants(player_id);
+    }
+  }
   def deletePlayer(player_id : Int) : Unit = {
     connect();
     executeDML(s"delete from salerates where player_id = $player_id;");
