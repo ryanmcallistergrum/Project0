@@ -207,7 +207,7 @@ object View {
     println(prettyPrint("-", 62, true, true, List("bold", "blue", "black_b")));
 
     println("Welcome to FarmSim!");
-    print("Press any key to continue...");
+    print("Press enter to continue...");
   }
 
   def mainMenu() : Unit = {
