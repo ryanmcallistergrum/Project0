@@ -27,7 +27,7 @@ object DBLoader extends DBManager {
           json("growthRates")(item)("sequence").num.toInt,
           json("growthRates")(item)("stage_description").str,
           json("growthRates")(item)("length").num.toInt,
-          json("growthRates")(item)("season").str,
+          json("growthRates")(item)("season").str
         );
       else
         for (i:Int <- json("growthRates")(item).arr.indices)
