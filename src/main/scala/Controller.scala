@@ -343,7 +343,7 @@ object Controller {
 
             var seed:String = "";
             val seeds:Map[String, Int] = DBManager.getInventory(player_id).filter(i => i._1.contains("Seed"));
-            seeds.foreach(i => println(i._1.split(" ")(0) + " ".repeat(i._1.split(" ")(0).length - seeds.keys.max.split(" ")(0).length + 1) + "Qty: " + i._2));
+            seeds.foreach(i => println(i._1.split(" ")(0) + " ".repeat(seeds.keys.max.split(" ")(0).length - i._1.split(" ")(0).length + 1) + "Qty: " + i._2));
 
             do {
               print("Please enter in the name of the seed to plant, or 'e' to return to the farm plots: ");
