@@ -112,6 +112,12 @@ object Controller {
     var input:String = "";
     val inputOptions:List[String] = List("p", "i", "s", "b", "n");
 
+    if (
+      DBManager.getPlayersInfo().filter(p => p._1 == player_id).head._4 == 0 ||
+      DBManager.getBankAccount(player_id)("debt") == 0
+    )
+      resultScreen();
+
     while(state.equals("farm")) {
       View.describeDay(player_id);
       View.farmActions();
