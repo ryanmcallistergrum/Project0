@@ -384,7 +384,7 @@ object Controller {
                 if (userPlantNum == 1)
                   println(s"Planted $userPlantNum $seed.");
                 else
-                  println(s"Planted $userPlantNum ${seed}s.");
+                  println(s"Planted $userPlantNum ${View.cropPlural(seed)}.");
 
                 println("Press enter to continue...");
                 val toss:String = readLine();
