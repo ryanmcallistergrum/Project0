@@ -232,7 +232,7 @@ class DBManager extends DBConnection {
   }
   def removeItemFromInventory(player_id : Int, item_name : String) : Unit = {
     connect();
-    executeDML("delete from inventory where player_id = $player_id and item_name = \"$item_name\";");
+    executeDML(s"delete from inventory where player_id = $player_id and item_name = \"$item_name\";");
     disconnect();
   }
 
@@ -655,7 +655,7 @@ object DBManager extends DBConnection {
   }
   def removeItemFromInventory(player_id : Int, item_name : String) : Unit = {
     connect();
-    executeDML("delete from inventory where player_id = $player_id and item_name = \"$item_name\";");
+    executeDML(s"delete from inventory where player_id = $player_id and item_name = \"$item_name\";");
     disconnect();
   }
 
