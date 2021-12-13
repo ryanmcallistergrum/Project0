@@ -381,9 +381,14 @@ object View {
     };
   }
 
-  def storeActions() : Unit = {
+  def storeActions(player_id : Int) : Unit = {
     print(prettyPrint("[B]", 1, true, true, List("green")));
     println("uy Item");
+
+    if (DBManager.getPlots(player_id).count(p => p._7 == "Fully Grown") > 0) {
+      print(prettyPrint("[S]", 1, true, true, List("yellow")));
+      println("ell Crops");
+    }
 
     print(prettyPrint("[E]", 1, true, true, List("red")));
     println("xit");

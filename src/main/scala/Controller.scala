@@ -407,11 +407,16 @@ object Controller {
   private def store() : Unit = {
     state = "store";
     var input:String = "";
-    val inputOptions:Set[String] = Set("b", "e");
+    val inputOptions:mutable.Set[String] = mutable.Set("b", "e");
+    val plotsInfo:List[(Int, Boolean, Boolean, Boolean, Boolean, String, String, Int)] = DBManager.getPlots(player_id);
+
+    if (plotsInfo.count(p => p._7 == "Fully Grown") > 0)
+      inputOptions.addOne("s");
+
 
     while (state.equals("store")) {
       View.store(player_id);
-      View.storeActions();
+      View.storeActions(player_id);
 
       do {
         print("Please select an action: ");
@@ -458,7 +463,10 @@ object Controller {
             } while (!input.equals("e") && (purchaseAmount < 1 || purchaseAmount > maxPurchasable));
 
             if (!input.equals("e")) {
-              DBManager.buyItem(player_id, item, purchaseAmount, DBManager.getPlayersInfo().filter(p => p._1 == player_id).head._5);
+              if (List("Watering Can", "Axe", "Hammer", "Hoe").contains(item))
+                DBManager.buyItem(player_id, item, purchaseAmount, "");
+              else
+                DBManager.buyItem(player_id, item, purchaseAmount, DBManager.getPlayersInfo().filter(p => p._1 == player_id).head._5);
               if (purchaseAmount == 1)
                 println(s"Purchased $purchaseAmount $item.")
               else
@@ -468,6 +476,28 @@ object Controller {
               val toss:String = readLine();
             }
           }
+        }
+        case "s" => {
+          println("You sell the following crops after discussing prices with the vendor:");
+          var sales:mutable.Map[String, Int] = mutable.Map();
+
+          for (crop:(Int, Boolean ,Boolean, Boolean, Boolean, String, String, Int) <- DBManager.getPlots(player_id).filter(p => p._7 == "Fully Grown")) {
+            if (!sales.contains(crop._6.split(" ")(0)))
+              sales.addOne(crop._6.split(" ")(0), 1);
+            else
+              sales.put(crop._6.split(" ")(0), sales(crop._6.split(" ")(0)) + 1);
+            DBManager.sellPlant(player_id, crop._6, crop._1);
+          }
+
+          val soldCrops:Map[String, Int] = DBManager.getSaleRates(player_id);
+          var  total:Int = 0;
+          for (crop:String <- sales.keys) {
+            println(s"${crop.split(" ")(0)}: ${sales(crop.split(" ")(0))} x ${soldCrops(crop.split(" ")(0))} = ${sales(crop.split(" ")(0)) * soldCrops(crop.split(" ")(0))}");
+            total += sales(crop.split(" ")(0)) * soldCrops(crop.split(" ")(0));
+          }
+          println(s"Total: $total");
+          print("Press enter to continue...");
+          val toss:String = readLine();
         }
         case "e" => state = "farm";
       }
