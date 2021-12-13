@@ -195,7 +195,7 @@ object Controller {
         case "Hoe" => inputOptions.addOne("t")
         case "Axe" => inputOptions.addOne("c");
         case "Hammer" => inputOptions.addOne("s");
-        case "%Seed" => inputOptions.addOne("p");
+        case s"$item Seed" => inputOptions.addOne("p");
       }
 
     while (state.equals("farm plot")) {
@@ -348,7 +348,7 @@ object Controller {
 
               var userPlantNum:Int = 0;
               do {
-                println(s"Please enter in the number of seeds you wish to plant (max: $maxPlantable): ");
+                print(s"Please enter in the number of seeds you wish to plant (max: $maxPlantable) or 'e' to return to the farm plots menu: ");
                 try {
                   input = readLine();
                   if (!input.equals("e"))
@@ -361,7 +361,7 @@ object Controller {
                     println("That is not a valid number! Please try again!");
                   }
                 }
-              } while (!input.equals("e") && userPlantNum < 1);
+              } while (!input.equals("e") && (userPlantNum < 1 || userPlantNum <= maxPlantable));
 
               if (!input.equals("e")) {
                 for (plot:(Int, Boolean, Boolean, Boolean, Boolean, String, String, Int) <- plots.filter(p => p._2 && p._6.isEmpty).dropRight(plots.count(p => p._2 && p._6.isEmpty) - userPlantNum))
