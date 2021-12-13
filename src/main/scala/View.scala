@@ -299,6 +299,8 @@ object View {
           println(plotsInfo.filter(p => p._6 == crop._6).count(p => p._7 == "Fully Grown") + " " + crop._6.split(" ").head);
         else
           println(plotsInfo.filter(p => p._6 == crop._6).count(p => p._7 == "Fully Grown") + " " + cropPlural(crop._6.split(" ").head));
+
+      // TODO: Add more information to View.farmPlotDetails().
     }
   }
 
@@ -321,9 +323,10 @@ object View {
       print(prettyPrint("[S]", 1, true, true, List("white")));
       println("mash Big Rocks");
     }
-
-    print(prettyPrint("[P]", 1, true, true, List("green")));
-    println("lant Crops");
+    if (inventory.exists(i => i._1.contains("Seed"))) {
+      print(prettyPrint("[P]", 1, true, true, List("green")));
+      println("lant Crops");
+    }
 
     print(prettyPrint("[E]", 1, true, true, List("red")));
     println("xit");
