@@ -1,4 +1,5 @@
-import Console._;
+import Console._
+import scala.collection.mutable;
 
 object View {
   def prettyPrint(input : String, length : Int, resetPrior : Boolean, resetAfter : Boolean, selections : List[String]) : String = {
@@ -286,11 +287,20 @@ object View {
     else
       println("You have " + plotsInfo.count(p => p._6.nonEmpty) + " crops.");
 
-    for(crop:(Int, Boolean, Boolean, Boolean, Boolean, String, String, Int) <- plotsInfo.filterNot(p => p._6.isEmpty).distinct)
-      if (plotsInfo.count(p => p._6 == crop._6) == 1)
-        println(plotsInfo.count(p => p._6 == crop._6 && p._7 == crop._7) + " " + crop._6.split(" ").head + " (" + crop._7 + ")");
-      else
-        println(plotsInfo.count(p => p._6 == crop._6) + " " + cropPlural(crop._6.split(" ").head) + " (" + crop._7 + ")");
+    var distinctCropCounts:mutable.Map[String, mutable.Map[String, Int]] = mutable.Map();
+    for(crop:(Int, Boolean, Boolean, Boolean, Boolean, String, String, Int) <- plotsInfo.filterNot(p => p._6.isEmpty))
+      if (!distinctCropCounts.contains(crop._6.split(" ")(0))) {
+        distinctCropCounts.put(crop._6.split(" ")(0), mutable.Map[String, Int]());
+        distinctCropCounts(crop._6.split(" ")(0)).put(crop._7, 1);
+      } else
+        distinctCropCounts(crop._6.split(" ")(0)).put(crop._7, distinctCropCounts(crop._6.split(" ")(0))(crop._7) + 1);
+
+    for(crop:String <- distinctCropCounts.keys)
+      for(stage:String <- distinctCropCounts(crop).keys)
+        if (distinctCropCounts(crop)(stage) == 1)
+          println(distinctCropCounts(crop)(stage) + " " + crop + " (" + stage + ")");
+        else
+          println(distinctCropCounts(crop)(stage) + " " + cropPlural(crop) + " (" + stage + ")")
 
     if (plotsInfo.count(p => p._7 == "Fully Grown") > 0) {
       println(plotsInfo.count(p => p._7 == "Fully Grown") + " are ready to be sold.")
