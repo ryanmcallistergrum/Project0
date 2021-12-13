@@ -288,9 +288,9 @@ object View {
 
     for(crop:(Int, Boolean, Boolean, Boolean, Boolean, String, String, Int) <- plotsInfo.distinctBy(p => p._6).filterNot(p => p._6.isEmpty))
       if (plotsInfo.count(p => p._6 == crop._6) == 1)
-        println(plotsInfo.count(p => p._6 == crop._6) + " " + crop._6.split(" ").head);
+        println(plotsInfo.count(p => p._6 == crop._6 && p._7 == crop._7) + " " + crop._6.split(" ").head + " (" + crop._7 + ")");
       else
-        println(plotsInfo.count(p => p._6 == crop._6) + " " + cropPlural(crop._6.split(" ").head));
+        println(plotsInfo.count(p => p._6 == crop._6) + " " + cropPlural(crop._6.split(" ").head) + " (" + crop._7 + ")");
 
     if (plotsInfo.count(p => p._7 == "Fully Grown") > 0) {
       println(plotsInfo.count(p => p._7 == "Fully Grown") + " are ready to be sold.")
