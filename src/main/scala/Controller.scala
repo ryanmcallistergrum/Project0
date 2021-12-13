@@ -434,7 +434,7 @@ object Controller {
 
             var purchaseAmount:Int = 0;
             do {
-              println(s"Please enter in the quantity of $item you wish to buy (max: $maxPurchasable), or 'e' to return to the shop menu: ");
+              print(s"Please enter in the quantity of $item you wish to buy (max: $maxPurchasable), or 'e' to return to the shop menu: ");
               try {
                 input = readLine();
                 if (!input.equals("e")) {
