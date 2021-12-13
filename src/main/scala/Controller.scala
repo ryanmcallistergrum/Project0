@@ -232,7 +232,7 @@ object Controller {
 
             println(s"Watered ${plots.filter(p => p._6.nonEmpty).filter(p => !p._7.equals("Fully Grown")).count(p => !p._3)} plots.");
           }
-          println("Press enter to continue...");
+          print("Press enter to continue...");
           val toss:String = readLine();
         }
         case "t" => {
