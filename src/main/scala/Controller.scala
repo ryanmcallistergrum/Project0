@@ -249,12 +249,13 @@ object Controller {
 
             println("Tilled 1 plot.");
           } else {
-            println("Walking through your fields, you find some spots that could fit another crop.")
+            println("Walking through your fields, you find some spots that could fit another crop.");
+            val preTillCount:Int = plots.filter(p => !p._4 && !p._5).count(p => !p._2);
 
             for (plot:(Int, Boolean, Boolean, Boolean, Boolean, String, String, Int) <- plots.filter(p => !p._4 && !p._5).filter(p => !p._2))
               DBManager.tillPlot(player_id, plot._1);
 
-            println(s"Tilled ${plots.filter(p => !p._4 && !p._5).count(p => !p._2)} plots.");
+            println(s"Tilled ${plots.filter(p => !p._4 && !p._5).count(p => !p._2) - preTillCount} plots.");
           }
           println("Press enter to continue...");
           val toss:String = readLine();
@@ -317,7 +318,7 @@ object Controller {
 
 
             do {
-              println("Please enter in the name of the seed to plant, or 'e' to return to the farm plots.");
+              print("Please enter in the name of the seed to plant, or 'e' to return to the farm plots: ");
               seed = readLine();
               if (!seed.equals("e") && !seeds.exists(s => s._1.startsWith(seed)))
                 println("Invalid option, please try again!")
@@ -337,7 +338,7 @@ object Controller {
             seeds.foreach(i => println(i._1.split(" ")(0) + " ".repeat(i._1.split(" ")(0).length - seeds.keys.max.split(" ")(0).length + 1) + "Qty: " + i._2));
 
             do {
-              println("Please enter in the name of the seed to plant, or 'e' to return to the farm plots.");
+              print("Please enter in the name of the seed to plant, or 'e' to return to the farm plots: ");
               seed = readLine();
               if (!seed.equals("e") && !seeds.exists(s => s._1.startsWith(seed)))
                 println("Invalid option, please try again!")
