@@ -250,12 +250,14 @@ object Controller {
             println("Tilled 1 plot.");
           } else {
             println("Walking through your fields, you find some spots that could fit another crop.");
-            val preTillCount:Int = plots.filter(p => !p._4 && !p._5).count(p => !p._2);
+            var tillCount:Int = 0;
 
-            for (plot:(Int, Boolean, Boolean, Boolean, Boolean, String, String, Int) <- plots.filter(p => !p._4 && !p._5).filter(p => !p._2))
-              DBManager.tillPlot(player_id, plot._1);
+            for (plot:(Int, Boolean, Boolean, Boolean, Boolean, String, String, Int) <- plots.filter(p => !p._4 && !p._5).filter(p => !p._2)) {
+              DBManager.tillPlot(player_id, plot._1)
+              tillCount += 1;
+            }
 
-            println(s"Tilled ${plots.filter(p => !p._4 && !p._5).count(p => !p._2) - preTillCount} plots.");
+            println(s"Tilled $tillCount plots.");
           }
           print("Press enter to continue...");
           val toss:String = readLine();
