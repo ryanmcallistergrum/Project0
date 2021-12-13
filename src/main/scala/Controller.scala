@@ -65,6 +65,7 @@ object Controller {
         state = "main menu";
       else {
         val playerIDList:mutable.ArrayBuffer[Int] = mutable.ArrayBuffer();
+        var gameId:Int = 0;
         DBManager.getPlayersInfo().foreach(p => playerIDList.addOne(p._1));
 
         do {
@@ -73,17 +74,20 @@ object Controller {
 
           if (input.isEmpty)
             println("Invalid player ID, please try again!");
-          else if (input.equals("e"))
-            state = "main menu";
           else if (!input.matches("[1-9][0-9]?+"))
             println("Invalid player ID, please try again!");
           else if (!playerIDList.contains(input.toInt))
             println("Invalid player ID, please try again!");
           else {
-            player_id = input.toInt;
-            farm();
+            gameId = input.toInt;
           }
-        } while (!input.equals("e") && !playerIDList.contains(input.toInt));
+        } while (!input.equals("e") && !playerIDList.contains(gameId));
+
+        if (!input.equals("e")) {
+          player_id = input.toInt;
+          farm();
+        } else
+          state = "main menu";
       }
     }
   }
@@ -425,24 +429,24 @@ object Controller {
 
           if (!input.equals("e")) {
             val balance:Int = DBManager.getBankAccount(player_id)("balance");
-            val maxPurchasable:Int = balance / shopList.filter(i => i._1.equals(input)).head._3;
+            val maxPurchasable:Int = Math.min(balance / shopList.filter(i => i._1.equals(input)).head._3, shopList.filter(i => i._1.equals(input)).head._2);
 
             var purchaseAmount:Int = 0;
             do {
-              println(s"Please enter in the quantity of $item you wish to buy (max: $maxPurchasable): ");
+              println(s"Please enter in the quantity of $item you wish to buy (max: $maxPurchasable), or 'e' to return to the shop menu: ");
               try {
                 input = readLine();
-                if (!input.equals("e"))
-                  if (input.toInt < 1)
-                    println("That is not a valid number! Please try again!");
-                  else
-                    purchaseAmount = input.toInt;
+                if (!input.equals("e")) {
+                  purchaseAmount = input.toInt
+                  if (input.toInt < 1 || input.toInt > maxPurchasable)
+                    println("That is not a valid quantity! Please try again!");
+                }
               } catch {
                 case a : NumberFormatException => {
                   println("That is not a valid number! Please try again!");
                 }
               }
-            } while (!input.equals("e") && purchaseAmount < 1);
+            } while (!input.equals("e") && (purchaseAmount < 1 || purchaseAmount > maxPurchasable));
 
             if (!input.equals("e")) {
               DBManager.buyItem(player_id, item, purchaseAmount, DBManager.getPlayersInfo().filter(p => p._1 == player_id).head._5);
