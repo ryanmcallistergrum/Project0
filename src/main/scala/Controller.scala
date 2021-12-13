@@ -506,11 +506,12 @@ object Controller {
 
   private def bankAccount() : Unit = {
     state = "bank account";
-    View.bankAccount(player_id);
     val inputOptions:List[String] = List("p", "e");
     var input:String = "";
 
     while (state.equals("bank account")) {
+      View.bankAccount(player_id);
+
       do {
         print("Please select an action: ");
         input = readLine();
@@ -531,14 +532,14 @@ object Controller {
               input = readLine();
               try {
                 paymentAmount = input.toInt;
-                if (paymentAmount < 0 && paymentAmount > maxPaymentAmount)
+                if (paymentAmount < 0 || paymentAmount > maxPaymentAmount)
                   println("That is not a valid amount, please try again!");
               } catch {
                 case n: NumberFormatException => {
                   println("That is not a valid number, please try again!");
                 }
               }
-            } while (paymentAmount < 0 && paymentAmount > maxPaymentAmount);
+            } while (paymentAmount < 0 || paymentAmount > maxPaymentAmount);
 
             if (paymentAmount == 0)
               println("You decided not to pay down your debt.");
