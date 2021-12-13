@@ -179,14 +179,14 @@ class DBManager extends DBConnection {
     return result.toMap;
   }
   def adjustBankBalance(player_id : Int, amt : Int) : Int = {
-    val currentBalance:Int = getBankAccount(1)("balance");
+    val currentBalance:Int = getBankAccount(player_id)("balance");
     connect();
 
     executeDML(s"update bankaccount set balance = ${currentBalance + amt} where player_id = $player_id;");
 
     disconnect();
 
-    return getBankAccount(1)("balance");
+    return getBankAccount(player_id)("balance");
   }
   def payDebt(player_id : Int, amt : Int) : immutable.Map[String, Int] = {
     adjustBankBalance(player_id, -amt);
@@ -602,14 +602,14 @@ object DBManager extends DBConnection {
     return result.toMap;
   }
   def adjustBankBalance(player_id : Int, amt : Int) : Int = {
-    val currentBalance:Int = getBankAccount(1)("balance");
+    val currentBalance:Int = getBankAccount(player_id)("balance");
     connect();
 
     executeDML(s"update bankaccount set balance = ${currentBalance + amt} where player_id = $player_id;");
 
     disconnect();
 
-    return getBankAccount(1)("balance");
+    return getBankAccount(player_id)("balance");
   }
   def payDebt(player_id : Int, amt : Int) : immutable.Map[String, Int] = {
     adjustBankBalance(player_id, -amt);
