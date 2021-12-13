@@ -487,16 +487,6 @@
       "days_grown" : 0
     },
     {
-      "plot_id" : 10,
-      "tilled" : false,
-      "watered" : false,
-      "hasBigRock" : false,
-      "hasStump" : false,
-      "item_name" : "",
-      "stage_description" : "",
-      "days_grown" : 0
-    },
-    {
       "plot_id" : 11,
       "tilled" : false,
       "watered" : false,
