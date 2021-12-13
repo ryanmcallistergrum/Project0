@@ -257,7 +257,7 @@ object Controller {
 
             println(s"Tilled ${plots.filter(p => !p._4 && !p._5).count(p => !p._2) - preTillCount} plots.");
           }
-          println("Press enter to continue...");
+          print("Press enter to continue...");
           val toss:String = readLine();
         }
         case "c" => {
