@@ -66,7 +66,7 @@ object Controller {
       else {
         val playerIDList:mutable.ArrayBuffer[Int] = mutable.ArrayBuffer();
         var gameId:Int = 0;
-        DBManager.getPlayersInfo().foreach(p => playerIDList.addOne(p._1));
+        DBManager.getPlayersInfo().foreach(p => playerIDList += p._1);
 
         do {
           print("Please select a player ID to load (or 'e' to return to the main menu): ");
@@ -191,11 +191,11 @@ object Controller {
 
     for(item:String <- DBManager.getInventory(player_id).keys)
       item match {
-        case "Watering Can" => inputOptions.addOne("w");
-        case "Hoe" => inputOptions.addOne("t")
-        case "Axe" => inputOptions.addOne("c");
-        case "Hammer" => inputOptions.addOne("s");
-        case s"$item Seed" => inputOptions.addOne("p");
+        case "Watering Can" => inputOptions += "w";
+        case "Hoe" => inputOptions += "t";
+        case "Axe" => inputOptions += "c";
+        case "Hammer" => inputOptions += "s";
+        case _ => inputOptions += "p";
       }
 
     while (state.equals("farm plot")) {
@@ -411,7 +411,7 @@ object Controller {
     val plotsInfo:List[(Int, Boolean, Boolean, Boolean, Boolean, String, String, Int)] = DBManager.getPlots(player_id);
 
     if (plotsInfo.count(p => p._7 == "Fully Grown") > 0)
-      inputOptions.addOne("s");
+      inputOptions += "s";
 
 
     while (state.equals("store")) {
@@ -483,7 +483,7 @@ object Controller {
 
           for (crop:(Int, Boolean ,Boolean, Boolean, Boolean, String, String, Int) <- DBManager.getPlots(player_id).filter(p => p._7 == "Fully Grown")) {
             if (!sales.contains(crop._6.split(" ")(0)))
-              sales.addOne(crop._6.split(" ")(0), 1);
+              sales += Tuple2(crop._6.split(" ")(0), 1);
             else
               sales.put(crop._6.split(" ")(0), sales(crop._6.split(" ")(0)) + 1);
             DBManager.sellPlant(player_id, crop._6, crop._1);

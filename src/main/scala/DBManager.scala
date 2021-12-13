@@ -21,7 +21,7 @@ class DBManager extends DBConnection {
     val id:Int = getNextPlayerId();
     connect();
 
-    executeDML(s"insert into playerinfo (player_id, gameVersion, name, day, season) values ( $id, \"$gameVersion\", \"$name\", 1, \"Spring\");");
+    executeDML(s"insert into playerinfo (player_id, gameVersion, name, day, season) values ( $id, ${"\""}$gameVersion${"\""}, ${"\""}$name${"\""}, 1, ${"\""}Spring${"\""});");
 
     disconnect();
 
@@ -34,15 +34,12 @@ class DBManager extends DBConnection {
     val rs:ResultSet = executeQuery("select player_id, gameVersion, name, day, season from playerinfo;");
     if (rs != null) {
       while (rs.next()) {
-        lb.addOne(
-          (
-            rs.getInt("player_id"),
-            rs.getString("gameVersion"),
-            rs.getString("name"),
-            rs.getInt("day"),
-            rs.getString("season")
-          )
-        );
+        lb +=
+          Tuple5(rs.getInt("player_id"),
+           rs.getString("gameVersion"),
+           rs.getString("name"),
+           rs.getInt("day"),
+           rs.getString("season"));
       }
       rs.close();
     }
@@ -130,7 +127,7 @@ class DBManager extends DBConnection {
 
   protected def addSeason(season : String, length : Int) : Unit = {
     connect();
-    executeDML(s"insert into seasons (season, length) values (\"$season\", $length);");
+    executeDML(s"insert into seasons (season, length) values (${"\""}$season${"\""}, $length);");
     disconnect();
   }
   def getSeasonsInfo() : immutable.Map[String, Int] = {
@@ -141,11 +138,10 @@ class DBManager extends DBConnection {
 
     if (rs != null) {
         while (rs.next())
-          result.addOne(
-            (
+          result +=
+            Tuple2(
               rs.getString("season"), rs.getInt("length")
-            )
-          )
+            );
         rs.close();
       }
 
@@ -168,8 +164,8 @@ class DBManager extends DBConnection {
 
     if (rs != null) {
       while (rs.next()) {
-        result.addOne(("balance", rs.getInt("balance")));
-        result.addOne(("debt", rs.getInt("debt")));
+        result += Tuple2("balance", rs.getInt("balance"));
+        result += Tuple2("debt", rs.getInt("debt"));
       }
       rs.close();
     }
@@ -203,7 +199,7 @@ class DBManager extends DBConnection {
 
   def addItemToInventory(player_id : Int, item_name : String, quantity :Int) : Unit = {
     connect();
-    executeDML(s"insert into inventory(player_id, item_name, quantity) values ($player_id, \"$item_name\", $quantity);");
+    executeDML(s"insert into inventory(player_id, item_name, quantity) values ($player_id, ${"\""}$item_name${"\""}, $quantity);");
     disconnect();
   }
   def getInventory(player_id : Int) : Map[String, Int] = {
@@ -215,11 +211,10 @@ class DBManager extends DBConnection {
 
     if (rs != null) {
       while (rs.next())
-        result.addOne(
-          (
+        result +=
+          Tuple2(
             rs.getString("item_name"), rs.getInt("quantity")
-          )
-        );
+          );
       rs.close();
     }
 
@@ -227,32 +222,31 @@ class DBManager extends DBConnection {
   }
   def updateItemInventoryQuantity(player_id : Int, item_name : String, newQuantity : Int) : Unit = {
     connect();
-    executeDML(s"update inventory set quantity = $newQuantity where player_id = $player_id and item_name = \"$item_name\";");
+    executeDML(s"update inventory set quantity = $newQuantity where player_id = $player_id and item_name = ${"\""}$item_name${"\""};");
     disconnect();
   }
   def removeItemFromInventory(player_id : Int, item_name : String) : Unit = {
     connect();
-    executeDML(s"delete from inventory where player_id = $player_id and item_name = \"$item_name\";");
+    executeDML(s"delete from inventory where player_id = $player_id and item_name = ${"\""}$item_name${"\""};");
     disconnect();
   }
 
   protected def addItemToStore(player_id : Int, item_name : String, quantity : Int, cost : Int, season : String) : Unit = {
     connect();
-    executeDML(s"insert into store (player_id, item_name, quantity_available, cost, season) values ($player_id, \"$item_name\", $quantity, $cost, \"$season\");");
+    executeDML(s"insert into store (player_id, item_name, quantity_available, cost, season) values ($player_id, ${"\""}$item_name${"\""}, $quantity, $cost, ${"\""}$season${"\""});");
     disconnect();
   }
   def getStoreForSeason(player_id : Int, season : String) : List[(String, Int, Int, String)] = {
     var result:mutable.ListBuffer[(String, Int, Int, String)] = mutable.ListBuffer();
     connect();
 
-    val rs:ResultSet = executeQuery(s"select item_name, quantity_available, cost, season from store where player_id = $player_id and (season = \"$season\" or season = \"\");");
+    val rs:ResultSet = executeQuery(s"select item_name, quantity_available, cost, season from store where player_id = $player_id and (season = ${"\""}$season${"\""} or season = ${"\""}${"\""});");
     if (rs != null) {
       while (rs.next()) {
-        result.addOne(
-          (
+        result +=
+          Tuple4(
             rs.getString("item_name"), rs.getInt("quantity_available"), rs.getInt("cost"), rs.getString("season")
-          )
-        );
+          );
       }
       rs.close();
     }
@@ -273,21 +267,21 @@ class DBManager extends DBConnection {
     val currentStoreQuantity:Int = getStoreForSeason(player_id, season).filter(i => i._1 == item_name).head._2;
 
     connect();
-    executeDML(s"update store set quantity_available = ${currentStoreQuantity - quantity} where player_id = $player_id and item_name = \"$item_name\" and season = \"$season\";");
+    executeDML(s"update store set quantity_available = ${currentStoreQuantity - quantity} where player_id = $player_id and item_name = ${"\""}$item_name${"\""} and season = ${"\""}$season${"\""};");
     disconnect();
   }
 
   protected def addGrowthRate(player_id : Int, item_name : String, sequence : Int, stage_description : String, length : Int, season : String) : Unit = {
     connect();
-    executeDML(s"insert into growthrates(player_id, item_name, sequence, stage_description, length, season) values ($player_id, \"$item_name\", $sequence, \"$stage_description\", $length, \"$season\");");
+    executeDML(s"insert into growthrates(player_id, item_name, sequence, stage_description, length, season) values ($player_id, ${"\""}$item_name${"\""}, $sequence, ${"\""}$stage_description${"\""}, $length, ${"\""}$season${"\""});");
     disconnect();
   }
   def getGrowthRates(player_id : Int, season : String) : List[(String, Int, String, Int, String)] = {
     var result:mutable.ListBuffer[(String, Int, String, Int, String)] = mutable.ListBuffer();
     val query:String = if (season.isEmpty)
-      s"select item_name, sequence, stage_description, length, season from growthrates where player_id = $player_id and season != \"\" order by field(season, \"spring\", \"summer\", \"fall\", \"winter\"), item_name, sequence;"
+      s"select item_name, sequence, stage_description, length, season from growthrates where player_id = $player_id and season != ${"\""}${"\""} order by field(season, ${"\""}spring${"\""}, ${"\""}summer${"\""}, ${"\""}fall${"\""}, ${"\""}winter${"\""}), item_name, sequence;"
     else
-      s"select item_name, sequence, stage_description, length, season from growthrates where player_id = $player_id and season = \"$season\" order by item_name, sequence;";
+      s"select item_name, sequence, stage_description, length, season from growthrates where player_id = $player_id and season = ${"\""}$season${"\""} order by item_name, sequence;";
 
     connect();
 
@@ -295,11 +289,10 @@ class DBManager extends DBConnection {
 
     if (rs != null) {
       while (rs.next())
-        result.addOne(
-          (
+        result +=
+          Tuple5(
             rs.getString("item_name"), rs.getInt("sequence"), rs.getString("stage_description"), rs.getInt("length"), rs.getString("season")
-          )
-        );
+          );
       rs.close();
     }
 
@@ -310,7 +303,7 @@ class DBManager extends DBConnection {
 
   protected def addSaleRate(player_id : Int, item_name : String, stage_description : String, profit : Int) : Unit = {
     connect();
-    executeDML(s"insert into salerates(player_id, item_name, stage_description, profit) values ($player_id, \"$item_name\", \"$stage_description\", $profit);");
+    executeDML(s"insert into salerates(player_id, item_name, stage_description, profit) values ($player_id, ${"\""}$item_name${"\""}, ${"\""}$stage_description${"\""}, $profit);");
     disconnect();
   }
   def getSaleRates(player_id : Int) : immutable.Map[String, Int] = {
@@ -322,11 +315,10 @@ class DBManager extends DBConnection {
 
     if (rs != null) {
       while (rs.next())
-        result.addOne(
-          (
+        result +=
+          Tuple2(
             rs.getString("item_name"), rs.getInt("profit")
-          )
-        );
+          );
       rs.close();
     }
 
@@ -337,7 +329,7 @@ class DBManager extends DBConnection {
 
   protected def addPlot(player_id : Int, plot_id : Int, tilled : Boolean, watered : Boolean, hasBigRock : Boolean, hasStump : Boolean, item_name : String, stage_description : String, daysGrown : Int) : Unit = {
     connect();
-    executeDML(s"insert into plots(player_id, plot_id, tilled, watered, hasBigRock, hasStump, item_name, stage_description, daysGrown) values ($player_id, $plot_id, $tilled, $watered, $hasBigRock, $hasStump, \"$item_name\", \"$stage_description\", $daysGrown);");
+    executeDML(s"insert into plots(player_id, plot_id, tilled, watered, hasBigRock, hasStump, item_name, stage_description, daysGrown) values ($player_id, $plot_id, $tilled, $watered, $hasBigRock, $hasStump, ${"\""}$item_name${"\""}, ${"\""}$stage_description${"\""}, $daysGrown);");
     disconnect();
   }
   def getPlots(player_id : Int) : List[(Int, Boolean, Boolean, Boolean, Boolean, String, String, Int)] = {
@@ -349,11 +341,10 @@ class DBManager extends DBConnection {
 
     if (rs != null) {
       while (rs.next())
-        result.addOne(
-          (
+        result +=
+          Tuple8(
             rs.getInt("plot_id"), rs.getBoolean("tilled"), rs.getBoolean("watered"), rs.getBoolean("hasBigRock"), rs.getBoolean("hasStump"), rs.getString("item_name"), rs.getString("stage_description"), rs.getInt("daysGrown")
-          )
-        );
+          );
       rs.close();
     }
 
@@ -386,7 +377,7 @@ class DBManager extends DBConnection {
 
     connect();
 
-    executeDML(s"update plots set item_name = \"$item_name\", stage_description = \"${plantDetails._3}\" where player_id = $player_id and plot_id = $plot_id;");
+    executeDML(s"update plots set item_name = ${"\""}$item_name${"\""}, stage_description = ${"\""}${plantDetails._3}${"\""} where player_id = $player_id and plot_id = $plot_id;");
 
     disconnect();
   }
@@ -404,7 +395,7 @@ class DBManager extends DBConnection {
          // Advance plant to next stage.
          val nextSequence:Int = plantGrowthRates.filter(p => p._3 == stageDescription).head._2 + 1;
          connect();
-         executeDML(s"update plots set stage_description = \"${plantGrowthRates.filter(p => p._2 == nextSequence).head._3}\", daysGrown = 0, watered = false where player_id = $player_id and plot_id = ${plant._1};");
+         executeDML(s"update plots set stage_description = ${"\""}${plantGrowthRates.filter(p => p._2 == nextSequence).head._3}${"\""}, daysGrown = 0, watered = false where player_id = $player_id and plot_id = ${plant._1};");
          disconnect();
        } else {
          connect();
@@ -415,7 +406,7 @@ class DBManager extends DBConnection {
   }
   def removePlant(player_id : Int, plot_id : Int) : Unit = {
     connect();
-    executeDML(s"update plots set item_name = \"\", stage_description = \"\", daysGrown = 0, watered = false where player_id = $player_id and plot_id = $plot_id;");
+    executeDML(s"update plots set item_name = ${"\""}${"\""}, stage_description = ${"\""}${"\""}, daysGrown = 0, watered = false where player_id = $player_id and plot_id = $plot_id;");
     disconnect();
   }
   def sellPlant(player_id : Int, item_name : String, plot_id : Int) : Int = {
@@ -444,7 +435,7 @@ object DBManager extends DBConnection {
     val id:Int = getNextPlayerId();
     connect();
 
-    executeDML(s"insert into playerinfo (player_id, gameVersion, name, day, season) values ( $id, \"$gameVersion\", \"$name\", 1, \"Spring\");");
+    executeDML(s"insert into playerinfo (player_id, gameVersion, name, day, season) values ( $id, ${"\""}$gameVersion${"\""}, ${"\""}$name${"\""}, 1, ${"\""}Spring${"\""});");
 
     disconnect();
 
@@ -457,15 +448,12 @@ object DBManager extends DBConnection {
     val rs:ResultSet = executeQuery("select player_id, gameVersion, name, day, season from playerinfo;");
     if (rs != null) {
       while (rs.next()) {
-        lb.addOne(
-          (
-            rs.getInt("player_id"),
+        lb +=
+          Tuple5(rs.getInt("player_id"),
             rs.getString("gameVersion"),
             rs.getString("name"),
             rs.getInt("day"),
-            rs.getString("season")
-          )
-        );
+            rs.getString("season"));
       }
       rs.close();
     }
@@ -553,7 +541,7 @@ object DBManager extends DBConnection {
 
   protected def addSeason(season : String, length : Int) : Unit = {
     connect();
-    executeDML(s"insert into seasons (season, length) values (\"$season\", $length);");
+    executeDML(s"insert into seasons (season, length) values (${"\""}$season${"\""}, $length);");
     disconnect();
   }
   def getSeasonsInfo() : immutable.Map[String, Int] = {
@@ -564,11 +552,10 @@ object DBManager extends DBConnection {
 
     if (rs != null) {
       while (rs.next())
-        result.addOne(
-          (
+        result +=
+          Tuple2(
             rs.getString("season"), rs.getInt("length")
-          )
-        )
+          );
       rs.close();
     }
 
@@ -591,8 +578,8 @@ object DBManager extends DBConnection {
 
     if (rs != null) {
       while (rs.next()) {
-        result.addOne(("balance", rs.getInt("balance")));
-        result.addOne(("debt", rs.getInt("debt")));
+        result += Tuple2("balance", rs.getInt("balance"));
+        result += Tuple2("debt", rs.getInt("debt"));
       }
       rs.close();
     }
@@ -626,7 +613,7 @@ object DBManager extends DBConnection {
 
   def addItemToInventory(player_id : Int, item_name : String, quantity :Int) : Unit = {
     connect();
-    executeDML(s"insert into inventory(player_id, item_name, quantity) values ($player_id, \"$item_name\", $quantity);");
+    executeDML(s"insert into inventory(player_id, item_name, quantity) values ($player_id, ${"\""}$item_name${"\""}, $quantity);");
     disconnect();
   }
   def getInventory(player_id : Int) : Map[String, Int] = {
@@ -638,11 +625,10 @@ object DBManager extends DBConnection {
 
     if (rs != null) {
       while (rs.next())
-        result.addOne(
-          (
+        result +=
+          Tuple2(
             rs.getString("item_name"), rs.getInt("quantity")
-          )
-        );
+          );
       rs.close();
     }
 
@@ -650,32 +636,31 @@ object DBManager extends DBConnection {
   }
   def updateItemInventoryQuantity(player_id : Int, item_name : String, newQuantity : Int) : Unit = {
     connect();
-    executeDML(s"update inventory set quantity = $newQuantity where player_id = $player_id and item_name = \"$item_name\";");
+    executeDML(s"update inventory set quantity = $newQuantity where player_id = $player_id and item_name = ${"\""}$item_name${"\""};");
     disconnect();
   }
   def removeItemFromInventory(player_id : Int, item_name : String) : Unit = {
     connect();
-    executeDML(s"delete from inventory where player_id = $player_id and item_name = \"$item_name\";");
+    executeDML(s"delete from inventory where player_id = $player_id and item_name = ${"\""}$item_name${"\""};");
     disconnect();
   }
 
   protected def addItemToStore(player_id : Int, item_name : String, quantity : Int, cost : Int, season : String) : Unit = {
     connect();
-    executeDML(s"insert into store (player_id, item_name, quantity_available, cost, season) values ($player_id, \"$item_name\", $quantity, $cost, \"$season\");");
+    executeDML(s"insert into store (player_id, item_name, quantity_available, cost, season) values ($player_id, ${"\""}$item_name${"\""}, $quantity, $cost, ${"\""}$season${"\""});");
     disconnect();
   }
   def getStoreForSeason(player_id : Int, season : String) : List[(String, Int, Int, String)] = {
     var result:mutable.ListBuffer[(String, Int, Int, String)] = mutable.ListBuffer();
     connect();
 
-    val rs:ResultSet = executeQuery(s"select item_name, quantity_available, cost, season from store where player_id = $player_id and (season = \"$season\" or season = \"\");");
+    val rs:ResultSet = executeQuery(s"select item_name, quantity_available, cost, season from store where player_id = $player_id and (season = ${"\""}$season${"\""} or season = ${"\""}${"\""});");
     if (rs != null) {
       while (rs.next()) {
-        result.addOne(
-          (
+        result +=
+          Tuple4(
             rs.getString("item_name"), rs.getInt("quantity_available"), rs.getInt("cost"), rs.getString("season")
-          )
-        );
+          );
       }
       rs.close();
     }
@@ -696,21 +681,21 @@ object DBManager extends DBConnection {
     val currentStoreQuantity:Int = getStoreForSeason(player_id, season).filter(i => i._1 == item_name).head._2;
 
     connect();
-    executeDML(s"update store set quantity_available = ${currentStoreQuantity - quantity} where player_id = $player_id and item_name = \"$item_name\" and season = \"$season\";");
+    executeDML(s"update store set quantity_available = ${currentStoreQuantity - quantity} where player_id = $player_id and item_name = ${"\""}$item_name${"\""} and season = ${"\""}$season${"\""};");
     disconnect();
   }
 
   protected def addGrowthRate(player_id : Int, item_name : String, sequence : Int, stage_description : String, length : Int, season : String) : Unit = {
     connect();
-    executeDML(s"insert into growthrates(player_id, item_name, sequence, stage_description, length, season) values ($player_id, \"$item_name\", $sequence, \"$stage_description\", $length, \"$season\");");
+    executeDML(s"insert into growthrates(player_id, item_name, sequence, stage_description, length, season) values ($player_id, ${"\""}$item_name${"\""}, $sequence, ${"\""}$stage_description${"\""}, $length, ${"\""}$season${"\""});");
     disconnect();
   }
   def getGrowthRates(player_id : Int, season : String) : List[(String, Int, String, Int, String)] = {
     var result:mutable.ListBuffer[(String, Int, String, Int, String)] = mutable.ListBuffer();
     val query:String = if (season.isEmpty)
-      s"select item_name, sequence, stage_description, length, season from growthrates where player_id = $player_id and season != \"\" order by field(season, \"spring\", \"summer\", \"fall\", \"winter\"), item_name, sequence;"
+      s"select item_name, sequence, stage_description, length, season from growthrates where player_id = $player_id and season != ${"\""}${"\""} order by field(season, ${"\""}spring${"\""}, ${"\""}summer${"\""}, ${"\""}fall${"\""}, ${"\""}winter${"\""}), item_name, sequence;"
     else
-      s"select item_name, sequence, stage_description, length, season from growthrates where player_id = $player_id and season = \"$season\" order by item_name, sequence;";
+      s"select item_name, sequence, stage_description, length, season from growthrates where player_id = $player_id and season = ${"\""}$season${"\""} order by item_name, sequence;";
 
     connect();
 
@@ -718,11 +703,10 @@ object DBManager extends DBConnection {
 
     if (rs != null) {
       while (rs.next())
-        result.addOne(
-          (
+        result +=
+          Tuple5(
             rs.getString("item_name"), rs.getInt("sequence"), rs.getString("stage_description"), rs.getInt("length"), rs.getString("season")
-          )
-        );
+          );
       rs.close();
     }
 
@@ -733,7 +717,7 @@ object DBManager extends DBConnection {
 
   protected def addSaleRate(player_id : Int, item_name : String, stage_description : String, profit : Int) : Unit = {
     connect();
-    executeDML(s"insert into salerates(player_id, item_name, stage_description, profit) values ($player_id, \"$item_name\", \"$stage_description\", $profit);");
+    executeDML(s"insert into salerates(player_id, item_name, stage_description, profit) values ($player_id, ${"\""}$item_name${"\""}, ${"\""}$stage_description${"\""}, $profit);");
     disconnect();
   }
   def getSaleRates(player_id : Int) : immutable.Map[String, Int] = {
@@ -745,11 +729,10 @@ object DBManager extends DBConnection {
 
     if (rs != null) {
       while (rs.next())
-        result.addOne(
-          (
+        result +=
+          Tuple2(
             rs.getString("item_name"), rs.getInt("profit")
-          )
-        );
+          );
       rs.close();
     }
 
@@ -760,7 +743,7 @@ object DBManager extends DBConnection {
 
   protected def addPlot(player_id : Int, plot_id : Int, tilled : Boolean, watered : Boolean, hasBigRock : Boolean, hasStump : Boolean, item_name : String, stage_description : String, daysGrown : Int) : Unit = {
     connect();
-    executeDML(s"insert into plots(player_id, plot_id, tilled, watered, hasBigRock, hasStump, item_name, stage_description, daysGrown) values ($player_id, $plot_id, $tilled, $watered, $hasBigRock, $hasStump, \"$item_name\", \"$stage_description\", $daysGrown);");
+    executeDML(s"insert into plots(player_id, plot_id, tilled, watered, hasBigRock, hasStump, item_name, stage_description, daysGrown) values ($player_id, $plot_id, $tilled, $watered, $hasBigRock, $hasStump, ${"\""}$item_name${"\""}, ${"\""}$stage_description${"\""}, $daysGrown);");
     disconnect();
   }
   def getPlots(player_id : Int) : List[(Int, Boolean, Boolean, Boolean, Boolean, String, String, Int)] = {
@@ -772,11 +755,10 @@ object DBManager extends DBConnection {
 
     if (rs != null) {
       while (rs.next())
-        result.addOne(
-          (
+        result +=
+          Tuple8(
             rs.getInt("plot_id"), rs.getBoolean("tilled"), rs.getBoolean("watered"), rs.getBoolean("hasBigRock"), rs.getBoolean("hasStump"), rs.getString("item_name"), rs.getString("stage_description"), rs.getInt("daysGrown")
-          )
-        );
+          );
       rs.close();
     }
 
@@ -809,7 +791,7 @@ object DBManager extends DBConnection {
 
     connect();
 
-    executeDML(s"update plots set item_name = \"$item_name\", stage_description = \"${plantDetails._3}\" where player_id = $player_id and plot_id = $plot_id;");
+    executeDML(s"update plots set item_name = ${"\""}$item_name${"\""}, stage_description = ${"\""}${plantDetails._3}${"\""} where player_id = $player_id and plot_id = $plot_id;");
 
     disconnect();
   }
@@ -827,7 +809,7 @@ object DBManager extends DBConnection {
         // Advance plant to next stage.
         val nextSequence:Int = plantGrowthRates.filter(p => p._3 == stageDescription).head._2 + 1;
         connect();
-        executeDML(s"update plots set stage_description = \"${plantGrowthRates.filter(p => p._2 == nextSequence).head._3}\", daysGrown = 0, watered = false where player_id = $player_id and plot_id = ${plant._1};");
+        executeDML(s"update plots set stage_description = ${"\""}${plantGrowthRates.filter(p => p._2 == nextSequence).head._3}${"\""}, daysGrown = 0, watered = false where player_id = $player_id and plot_id = ${plant._1};");
         disconnect();
       } else {
         connect();
@@ -838,7 +820,7 @@ object DBManager extends DBConnection {
   }
   def removePlant(player_id : Int, plot_id : Int) : Unit = {
     connect();
-    executeDML(s"update plots set item_name = \"\", stage_description = \"\", daysGrown = 0, watered = false where player_id = $player_id and plot_id = $plot_id;");
+    executeDML(s"update plots set item_name = ${"\""}${"\""}, stage_description = ${"\""}${"\""}, daysGrown = 0, watered = false where player_id = $player_id and plot_id = $plot_id;");
     disconnect();
   }
   def sellPlant(player_id : Int, item_name : String, plot_id : Int) : Int = {

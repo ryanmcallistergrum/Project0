@@ -286,7 +286,7 @@ object View {
     else
       println("You have " + plotsInfo.count(p => p._6.nonEmpty) + " crops.");
 
-    for(crop:(Int, Boolean, Boolean, Boolean, Boolean, String, String, Int) <- plotsInfo.distinctBy(p => p._6).filterNot(p => p._6.isEmpty))
+    for(crop:(Int, Boolean, Boolean, Boolean, Boolean, String, String, Int) <- plotsInfo.filterNot(p => p._6.isEmpty).distinct)
       if (plotsInfo.count(p => p._6 == crop._6) == 1)
         println(plotsInfo.count(p => p._6 == crop._6 && p._7 == crop._7) + " " + crop._6.split(" ").head + " (" + crop._7 + ")");
       else
@@ -294,7 +294,7 @@ object View {
 
     if (plotsInfo.count(p => p._7 == "Fully Grown") > 0) {
       println(plotsInfo.count(p => p._7 == "Fully Grown") + " are ready to be sold.")
-      for(crop:(Int, Boolean, Boolean, Boolean, Boolean, String, String, Int) <- plotsInfo.filter(p => p._7 == "Fully Grown").distinctBy(p => p._6))
+      for(crop:(Int, Boolean, Boolean, Boolean, Boolean, String, String, Int) <- plotsInfo.filter(p => p._7 == "Fully Grown").distinct)
         if (plotsInfo.filter(p => p._6 == crop._6).count(p => p._7 == "Fully Grown") == 1)
           println(plotsInfo.filter(p => p._6 == crop._6).count(p => p._7 == "Fully Grown") + " " + crop._6.split(" ").head);
         else

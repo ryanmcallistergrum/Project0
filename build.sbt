@@ -1,6 +1,6 @@
 ThisBuild / version := "0.1"
 
-ThisBuild / scalaVersion := "2.13.7"
+ThisBuild / scalaVersion := "2.11.12"
 
 libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.25"
 libraryDependencies += "com.lihaoyi" %% "upickle" % "1.4.2"
