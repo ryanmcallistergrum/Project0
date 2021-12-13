@@ -1,7 +1,7 @@
 import Console._;
 
 object View {
-  private def prettyPrint(input : String, length : Int, resetPrior : Boolean, resetAfter : Boolean, selections : List[String]) : String = {
+  def prettyPrint(input : String, length : Int, resetPrior : Boolean, resetAfter : Boolean, selections : List[String]) : String = {
     var result:String = input.repeat(length);
 
     for (s:String <- selections)
@@ -37,7 +37,7 @@ object View {
     return result;
   }
 
-  private def cropPlural(crop : String) : String = {
+  def cropPlural(crop : String) : String = {
     crop match {
       case "Avocado" => "Avocados";
       case "Blueberry" => "Blueberries";
