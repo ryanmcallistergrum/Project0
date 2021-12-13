@@ -492,8 +492,8 @@ object Controller {
           val soldCrops:Map[String, Int] = DBManager.getSaleRates(player_id);
           var  total:Int = 0;
           for (crop:String <- sales.keys) {
-            println(s"${crop.split(" ")(0)}: ${sales(crop.split(" ")(0))} x ${soldCrops(crop.split(" ")(0))} = ${sales(crop.split(" ")(0)) * soldCrops(crop.split(" ")(0))}");
-            total += sales(crop.split(" ")(0)) * soldCrops(crop.split(" ")(0));
+            println(s"$crop: ${sales(crop)} x ${soldCrops(crop + " Seed")} = ${sales(crop) * soldCrops(crop + " Seed")}");
+            total += sales(crop) * soldCrops(crop + " Seed");
           }
           println(s"Total: $total");
           print("Press enter to continue...");
