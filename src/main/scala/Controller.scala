@@ -328,8 +328,14 @@ object Controller {
 
             if (!seed.equals("e")) {
               DBManager.addPlant(player_id, plots.filter(p => p._6.isEmpty).head._1, seeds.filter(s => s._1.startsWith(seed)).head._1)
+
+              if (seeds.filter(s=> s._1.startsWith(seed)).head._2 == 1)
+                DBManager.removeItemFromInventory(player_id, seeds.filter(s => s._1.startsWith(seed)).head._1);
+              else
+                DBManager.updateItemInventoryQuantity(player_id, seeds.filter(s => s._1.startsWith(seed)).head._1, seeds.filter(s => s._1.startsWith(seed)).head._2 - 1);
+
               println(s"1 $seed planted.");
-              println("Press enter to continue...");
+              print("Press enter to continue...");
               val toss:String = readLine();
             }
           } else if (plots.filter(p => p._2).count(p => p._6.isEmpty) > 1) {
@@ -364,7 +370,7 @@ object Controller {
                     println("That is not a valid number! Please try again!");
                   }
                 }
-              } while (!input.equals("e") && (userPlantNum < 1 || userPlantNum <= maxPlantable));
+              } while (!input.equals("e") && (userPlantNum < 1 || userPlantNum > maxPlantable));
 
               if (!input.equals("e")) {
                 for (plot:(Int, Boolean, Boolean, Boolean, Boolean, String, String, Int) <- plots.filter(p => p._2 && p._6.isEmpty).dropRight(plots.count(p => p._2 && p._6.isEmpty) - userPlantNum))
