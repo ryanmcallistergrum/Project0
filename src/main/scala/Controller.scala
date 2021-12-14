@@ -21,6 +21,7 @@ object Controller {
     val inputOptions:List[String] = List("n", "l", "c", "e");
 
     while (state.equals("main menu")) {
+      println();
       View.mainMenu();
 
       do {
@@ -44,6 +45,7 @@ object Controller {
     var input:String = "";
 
     while(state.equals("new game")) {
+      println();
       do {
         print("Please enter in your player name: ");
         input = readLine();
@@ -61,6 +63,7 @@ object Controller {
     var input:String = "";
 
     while(state.equals("load game")) {
+      println();
       if (View.loadGame() == 0)
         state = "main menu";
       else {
@@ -94,6 +97,7 @@ object Controller {
 
   private def clearAllData() : Unit = {
     var input:String = "";
+    println();
 
     do {
       println("Are you sure you want to clear all data?");
@@ -123,6 +127,7 @@ object Controller {
       resultScreen();
 
     while(state.equals("farm")) {
+      println();
       View.describeDay(player_id);
       View.farmActions();
 
@@ -199,6 +204,7 @@ object Controller {
       }
 
     while (state.equals("farm plot")) {
+      println();
       View.farmPlotDetails(player_id);
       View.farmPlotActions(player_id);
 
@@ -280,7 +286,7 @@ object Controller {
 
             println(s"You chopped up ${plots.count(p => p._5)} Stumps.");
           }
-          println("Press enter to continue...");
+          print("Press enter to continue...");
           val toss:String = readLine();
         }
         case "s" => {
@@ -301,7 +307,7 @@ object Controller {
 
             println(s"You smashed ${plots.count(p => p._4)} Big Rocks.");
           }
-          println("Press enter to continue...");
+          print("Press enter to continue...");
           val toss:String = readLine();
         }
         case "p" => {
@@ -386,7 +392,7 @@ object Controller {
                 else
                   println(s"Planted $userPlantNum ${View.cropPlural(seed)}.");
 
-                println("Press enter to continue...");
+                print("Press enter to continue...");
                 val toss:String = readLine();
               } else
                 state = "farm";
@@ -399,6 +405,7 @@ object Controller {
   }
 
   private def inventory() : Unit = {
+    println();
     View.inventory(player_id);
     print("Press enter to continue...");
     val toss:String = readLine();
@@ -415,6 +422,7 @@ object Controller {
 
 
     while (state.equals("store")) {
+      println();
       View.store(player_id);
       View.storeActions(player_id);
 
@@ -510,6 +518,7 @@ object Controller {
     var input:String = "";
 
     while (state.equals("bank account")) {
+      println();
       View.bankAccount(player_id);
 
       do {
@@ -557,6 +566,7 @@ object Controller {
   }
 
   private def resultScreen() : Unit = {
+    println();
     View.finalResults(player_id);
     print("Press enter to return to the main menu...");
     val toss:String = readLine();
