@@ -1,7 +1,7 @@
 
 object DBLoader extends DBManager {
   def loadJSONConfigIntoDatabase(new_player_name : String) : Int = {
-    val json = ujson.read(os.read(os.pwd / "gameConfig.json"));
+    val json = ujson.read(getClass.getResourceAsStream("/gameConfig.json"));
 
     if (getSeasonsInfo().isEmpty)
       for(season <- json("seasons").obj.keys)

@@ -4,7 +4,6 @@ ThisBuild / scalaVersion := "2.11.12"
 
 libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.25"
 libraryDependencies += "com.lihaoyi" %% "ujson" % "1.4.2"
-libraryDependencies += "com.lihaoyi" %% "os-lib" % "0.7.8"
 
 assemblyJarName := "FarmSim v0.1.jar"
 
