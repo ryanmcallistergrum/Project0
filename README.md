@@ -42,4 +42,17 @@ Project0 combines Scala with MySQL to create a persistent farming simulator call
   - ![Main Menu](/images/Main%20Menu.png?raw=true)
 - After loading or starting a new game, the Farm Menu appears, which provides date info, describes the day, provides a summarized report on crops, and offers a list of actions
   - ![Farm Menu](/images/Farm%20Menu.png?raw=true)
-- 
+- The Farm Plots menu provides details on the currently-planted crops and a list of available actions, depending on the tools the player has in their inventory
+  - The player can also sell their fully-grown crops here
+  - ![Farm Plots](/images/Farm%20Plots.png?raw=true)
+  - ![Farm Plots Planted Crop With Hoe](/images/Farm%20Plots%20Planted%20Crop%20With%20Hoe.png?raw=true)
+- The Inventory menu provides a list of tools and seeds the player has in their possession
+  - ![Inventory](/images/Inventory.png?raw=true)
+- The Store provides a list of seeds available for purchase during the season, tools, and the player's current gold count
+  - ![Store](/images/Store.png?raw=true)
+- Finally, the Bank menu displays the amount of debt owed and the player's current gold quantity
+  - This is where the player can pay off their debt
+  - ![Bank](/images/Bank.png?raw=true)
+
+## License
+This project uses the following license: The Unlicense
